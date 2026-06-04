@@ -1,0 +1,361 @@
+/* --- Variáveis de Cores e Estilos --- */
+:root {
+    --bg-main: #f4f6fa;       /* Fundo acinzentado do site */
+    --bg-card-active: #eff4fc; /* Azul muito claro do item ativo */
+    --text-primary: #0a3d80;   /* Azul escuro dos textos e títulos */
+    --text-muted: #627d98;      /* Cinza para textos secundários */
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* --- Reset Básico --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-family);
+}
+
+/* --- Estrutura Grid Principal --- */
+.app-container {
+    display: grid;
+    grid-template-columns: 350px 1fr; /* Sidebar imponente a 350px */
+    grid-template-rows: 80px 1fr;
+    grid-template-areas: 
+        "sidebar navbar"
+        "sidebar conteudo";
+    height: 100vh;
+    background-color: var(--bg-main);
+    transition: grid-template-columns 0.3s ease;
+}
+
+/* --- Estilização da Sidebar --- */
+.app-sidebar {
+    grid-area: sidebar;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    padding: 24px;          /* Simplificado para melhor controlo */
+    height: 100vh;         
+    box-sizing: border-box;
+    border-right: 1px solid #e2e8f0; 
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.04); 
+    z-index: 10;
+    transition: width 0.3s ease, padding 0.3s ease, left 0.3s ease;
+    overflow: hidden;       /* Garante que nada transborda da barra principal */
+}
+
+.sidebar-brand {
+    padding: 0 16px;       
+    margin-bottom: 48px;      
+    display: flex;
+    justify-content: center;  /* Alinha ao centro horizontalmente */
+    align-items: center;      /* Alinha ao centro verticalmente */
+    width: 100%;
+    position: relative;
+}
+
+.logo-link {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 85%;           
+}
+
+/* --- Mantém a imagem responsiva --- */
+.logo-img {
+    display: block;
+    width: auto;              
+    height: auto;             
+    max-height: 80px;         
+    object-fit: contain;      
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1;          /* Ocupa todo o espaço vertical restante */
+    
+    display: flex;
+    flex-direction: column;
+    gap: 12px;             /* Reduzido ligeiramente de 16px para respirar melhor em portáteis */
+    
+    /* CORRIGIDO: Em vez de calc fixo, usamos flex-basis para gerir o scroll */
+    overflow-y: auto;      
+    overflow-x: hidden;
+}
+
+.menu-item a {
+    display: flex;
+    align-items: center;
+    padding: 18px 22px;       /* Clique aumentado e confortável */
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 700;         /* Letras a Negrito bem visível */
+    font-size: 20px;          /* Texto grande e premium */
+    border-radius: 30px;
+    transition: all 0.2s ease;
+}
+
+.menu-item a:hover {
+    background-color: #f8fafc;
+    color: var(--text-primary);
+}
+
+/* Item Ativo */
+.menu-item.active a {
+    background-color: var(--bg-card-active);
+    color: var(--text-primary);
+}
+
+/* Empurra as definições para o fundo da sidebar com segurança */
+.menu-item.settings {
+    margin-top: auto; 
+    padding-top: 16px; 
+}
+
+/* Torna a scrollbar do menu minimalista */
+.sidebar-menu::-webkit-scrollbar {
+    width: 4px;
+}
+.sidebar-menu::-webkit-scrollbar-thumb {
+    background-color: #e2e8f0;
+    border-radius: 4px;
+}
+
+/* --- Estilo Base do Ícone SVG (Forçado) --- */
+.menu-icon {
+    width: 30px !important;
+    height: 30px !important;
+    min-width: 30px;          
+    margin-right: 16px;
+    display: inline-block;
+    vertical-align: middle;
+    
+    fill: currentColor;   
+    stroke: currentColor;
+    
+    transition: all 0.2s ease;
+    overflow: visible !important; 
+    padding: 1px;                 
+    box-sizing: border-box;       
+}
+
+/* Garante que caminhos internos também herdam as cores corretas */
+.menu-icon path,
+.menu-icon rect,
+.menu-icon line {
+    fill: inherit;
+    stroke: inherit;
+}
+
+/* --- Ajuste específico para quando o menu-icon é usado na Navbar --- */
+.app-navbar .menu-icon {
+    width: 25px !important;
+    height: 25px !important;
+    margin-right: 0 !important;
+}
+
+/* --- BOTÕES MOBILE (Escondidos no PC) --- */
+.mobile-menu-btn, .mobile-close-btn {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-primary);
+    align-items: center;
+    justify-content: center;
+}
+.mobile-menu-btn svg, .mobile-close-btn svg {
+    width: 30px;
+    height: 30px;
+}
+
+/* --- Estilização da Navbar Superior --- */
+.app-navbar {
+    grid-area: navbar;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    border-bottom: 1px solid #e2e8f0; 
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04); 
+    z-index: 9; 
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-left .page-title {
+    color: var(--text-primary);
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 20px; 
+}
+
+/* Botão de Notificação */
+.notification-btn {
+    background-color: #f1f5f9; 
+    border: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted); 
+}
+
+/* Pílula do Perfil */
+.user-profile {
+    display: flex;
+    align-items: center;
+    background-color: #f1f5f9; 
+    padding: 6px 16px 6px 6px;
+    border-radius: 30px;
+    gap: 12px;
+    cursor: pointer;
+    color: var(--text-primary); 
+}
+
+.profile-avatar {
+    width: 36px;
+    height: 36px;
+    background-color: #e2e8f0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-name {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 14px;
+}
+
+.dropdown-arrow {
+    font-size: 10px;
+    color: var(--text-muted);
+}
+
+/* --- Área de Conteúdo --- */
+.app-conteudo {
+    grid-area: conteudo;
+    padding: 40px;
+    overflow-y: auto;
+}
+
+
+/* ==========================================================================
+   MÁGICA DO RESPONSIVO: VERSÃO MINI COMPACTA (Até 1024px)
+   ========================================================================== */
+@media (max-width: 1024px) {
+    
+    .app-container {
+        grid-template-columns: 80px 1fr;
+        grid-template-areas: "sidebar navbar" "sidebar conteudo";
+    }
+
+    .app-sidebar {
+        width: 80px !important;
+        padding: 12px 8px;
+        overflow: hidden;
+        transition: width 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .app-sidebar .logo-link, .app-sidebar .menu-text {
+        display: none;
+    }
+
+    .app-sidebar .menu-item a {
+        justify-content: center;
+        padding: 14px 0;
+        border-radius: 50%;
+    }
+    
+    .app-sidebar .menu-icon {
+        margin-right: 0 !important;
+    }
+
+    .mobile-menu-btn {
+        display: flex !important;
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .logo-img-mini {
+        width: auto;
+        height: auto;
+        max-height: 40px;
+        object-fit: contain;
+    }
+
+    /* ----------------------------------------------------------------------
+       SE FOR PC (Tem Rato): Abre e fecha com HOVER puro
+       ---------------------------------------------------------------------- */
+    @media (hover: hover) {
+        .mobile-close-btn { display: none !important; }
+        
+        .app-sidebar:hover {
+            position: fixed;
+            top: 0; left: 0;
+            width: 350px !important;
+            z-index: 999;
+            padding: 12px 24px;
+            box-shadow: 10px 0 30px rgba(0,0,0,0.15);
+        }
+        .app-sidebar:hover .logo-link, .app-sidebar:hover .menu-text { display: block; }
+        .app-sidebar:hover .menu-item a { justify-content: flex-start; padding: 18px 22px; border-radius: 30px; }
+        .app-sidebar:hover .menu-icon { margin-right: 18px !important; }
+        .app-sidebar:hover .mobile-menu-btn { display: none !important; }
+    }
+
+    /* ----------------------------------------------------------------------
+       SE FOR TELEMÓVEL/TABLET (Touch): Abre e fecha com a classe .open (Clique)
+       ---------------------------------------------------------------------- */
+    @media (hover: none) {
+        /* Reativa a seta de fechar no mobile para o utilizador conseguir sair */
+        .mobile-close-btn { display: none; }
+        .app-sidebar.open .mobile-close-btn { display: flex; position: absolute; left: 10px; }
+        
+        .app-sidebar.open {
+            position: fixed;
+            top: 0; left: 0;
+            width: 350px !important;
+            z-index: 999;
+            padding: 12px 24px;
+            box-shadow: 10px 0 30px rgba(0,0,0,0.15);
+        }
+        .app-sidebar.open .logo-link, .app-sidebar.open .menu-text { display: block; }
+        .app-sidebar.open .menu-item a { justify-content: flex-start; padding: 18px 22px; border-radius: 30px; }
+        .app-sidebar.open .menu-icon { margin-right: 18px !important; }
+        .app-sidebar.open .mobile-menu-btn { display: none !important; }
+    }
+
+    /* Fundo Escuro para o toque do telemóvel */
+    .sidebar-overlay {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw; height: 100vh;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 998;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+    .sidebar-overlay.show { opacity: 1; pointer-events: auto; }
+}

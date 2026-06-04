@@ -1,0 +1,692 @@
+/* =========================================
+            RESET E ESTILOS GERAIS
+   ========================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Public Sans', sans-serif;
+}
+
+.bg-auth {
+  height: 100vh;             /* Força exatamente a altura da janela */
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;       /* Mantém o cartão sempre centrado verticalmente */
+  background-image: url("../images/FundoLoginRegister.jpeg");
+  background-size: cover;
+  background-position: center;
+  padding: 15px;             
+  overflow: hidden;          /* 🌟 IMPEDE A APARIÇÃO DA BARRA DE SCROLL */
+}
+
+/* =========================================
+            CARTÃO DE LOGIN
+   ========================================= */
+.login-card {
+  background-color: #b3c5d7; 
+  width: 100%;
+  max-width: 400px;
+  max-height: 95vh;          /* Garante que o cartão nunca sai dos limites da tela */
+  padding: 25px 30px 20px 30px; /* 🌟 REDUZIDO: Padding do topo de 40px para 25px */
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  display: flex;
+  flex-direction: column;    /* Alinha o conteúdo interno verticalmente */
+  justify-content: center;
+}
+
+/* =========================================
+   CABEÇALHO E LOGÓTIPO
+   ========================================= */
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;     /* 🌟 REDUZIDO: de 20px para 15px */
+}
+
+.logo-img {
+    height: 60px;            /* 🌟 OTIMIZADO: Ajustado ligeiramente para poupar espaço vertical */
+    width: auto;
+    object-fit: contain;
+}
+
+.welcome-text {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 15px;       /* 🌟 REDUZIDO: de 25px para 15px */
+}
+
+/* =========================================
+   FORMULÁRIO E ÍCONES (FontAwesome + SVG)
+   ========================================= */
+.input-group {
+    position: relative;
+    margin-bottom: 12px;     /* 🌟 REDUZIDO: de 15px para 12px para compactação */
+}
+
+.input-group svg {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;  
+    height: 20px; 
+    color: #999;  
+    fill: #999;   
+}
+
+.input-group input {
+    width: 100%;
+    padding: 11px 15px 11px 45px; /* 🌟 OTIMIZADO: Altura interna dos inputs ligeiramente menor */
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.input-group input::placeholder {
+  color: #999;
+  font-weight: 500;
+}
+
+/* =========================================
+            BOTÕES
+   ========================================= */
+.btn-primary {
+  width: 100%;
+  background-color: #0f4a8a;
+  color: white;
+  border: none;
+  padding: 11px;             /* 🌟 OTIMIZADO */
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 2px;
+  transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #0c386a;
+}
+
+.btn-social {
+  width: 100%;
+  background-color: white;
+  color: #333;
+  border: none;
+  padding: 8px 10px;         /* 🌟 REDUZIDO: de 10px para 8px verticais */
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-bottom: 8px;        /* 🌟 REDUZIDO: de 12px para 8px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.3s;
+}
+
+.btn-social:hover {
+  background-color: #f5f5f5;
+}
+
+.social-icon-img {
+    width: 18px;  
+    height: 18px;
+    margin-right: 10px; 
+    object-fit: contain;
+}
+
+/* =========================================
+   DIVISOR COM LINHAS ("--- ou ---")
+   ========================================= */
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #555;
+    font-size: 11px;
+    margin: 12px 0;          /* 🌟 REDUZIDO: Espaçamento de 20px para 12px */
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #8ba4bd; 
+}
+
+.divider::before {
+    margin-right: 15px;
+}
+
+.divider::after {
+    margin-left: 15px;
+}
+
+/* =========================================
+            RODAPÉ E LINKS
+   ========================================= */
+.register-text {
+  font-size: 12px;
+  color: #444;
+  margin-top: 4px;
+  margin-bottom: 15px;       /* 🌟 REDUZIDO: de 25px para 15px */
+}
+
+.register-text a {
+  color: #0f4a8a;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.register-text a:hover {
+  text-decoration: underline;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+}
+
+.footer-links a {
+  color: #fcfcfc;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+/* =========================================
+            BLOCOS DE ERRO (TOP)
+   ========================================= */
+.error-box {
+    background-color: #fdf2f2;
+    border: 1px solid #f8b4b4;
+    border-radius: 6px;
+    padding: 10px 12px;
+    margin-bottom: 12px;     /* 🌟 REDUZIDO: de 20px para 12px */
+    text-align: left;
+}
+.error-title {
+    color: #9b1c1c;
+    font-size: 13px;
+    margin: 0 0 4px 0;
+    font-weight: 600;
+}
+.error-list {
+    color: #c81e1e;
+    font-size: 12px;
+    margin: 0;
+    padding-left: 18px;
+}
+.input-error-border {
+    border: 2px solid #ff4d4d !important;
+}
+
+/* Garante que o iframe que a Google gera fica invisível mas clicável em toda a extensão do teu botão */
+.google-wrapper .g_id_signin iframe {
+    width: 100% !important;
+    cursor: pointer !important;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #8ba4bd; /* Cor da linha que combina com o teu fundo */
+}
+
+.divider::before {
+    margin-right: 15px;
+}
+
+.divider::after {
+    margin-left: 15px;
+}
+
+/* --- Breadcrumb --- */
+.breadcrumb {
+    color: var(--text-primary);
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 32px;
+}
+
+.breadcrumb-link {
+    color: var(--text-muted); /* Cor mais discreta */
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.breadcrumb-link:hover {
+    color: #0b5394; /* Fica azul ao passar o rato */
+    text-decoration: underline; /* Sublinha para dar a dica de que é clicável */
+}
+
+.breadcrumb-separator {
+    margin: 0 8px;
+    color: var(--text-muted);
+}
+
+.breadcrumb-current {
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+/* --- Card do Jogo --- */
+.game-match-card {
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.02);
+    margin-bottom: 40px;
+}
+
+.team-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+.team-badge {
+    width: auto;
+    height: 140px; /* Ajusta conforme o tamanho real dos teus emblemas */
+    object-fit: contain;
+    margin-bottom: 16px;
+}
+
+.team-title-match {
+    color: var(--text-primary);
+    font-size: 32px;
+    font-weight: 700;
+}
+
+/* Detalhes do Centro */
+.match-details-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    flex: 1;
+}
+
+.match-date {
+    color: var(--text-muted);
+    font-weight: 700;
+    font-size: 16px;
+    text-align: center;
+}
+
+.match-location {
+    color: var(--text-muted);
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.match-score {
+    color: var(--text-primary);
+    font-size: 56px;
+    font-weight: 700;
+    margin-top: 20px;
+}
+
+/* --- Sistema de Abas e Botão --- */
+.tabs-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: -1px; /* Faz as abas colarem perfeitamente na caixa de baixo */
+}
+
+.tabs-navigation {
+    display: flex;
+    gap: 8px;
+}
+
+.tab-btn {
+    background-color: #455a64; /* Azul acinzentado escuro para o botão inativo */
+    color: #ffffff;
+    border: none;
+    padding: 12px 32px;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 12px 12px 0 0; /* Arredonda apenas os cantos de cima */
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* Aba Ativa (Branca com texto azul escuro) */
+.tab-btn.active {
+    background-color: #ffffff;
+    color: var(--text-primary);
+}
+
+/* Botão Nova Convocatória */
+.btn-primary-action {
+    background-color: #0b5394; /* Azul escuro premium */
+    color: #ffffff;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-bottom: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-primary-action:hover {
+    background-color: #0a3d80;
+}
+
+/* --- Caixa de Conteúdo Abaixo das Abas --- */
+.tab-content-box {
+    background-color: #ffffff;
+    border-radius: 0 20px 20px 20px; /* Canto superior esquerdo reto para alinhar com a aba ativa */
+    padding: 40px;
+    min-height: 300px; /* Garante espaço visual mesmo que esteja vazia */
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.02);
+}
+/* =========================================
+   CARTÕES DE EQUIPAS
+   ========================================= */
+.section-title {
+    color: var(--text-primary);
+    font-size: 18px;
+    font-weight: 700;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.main-team-card {
+    background-color: white;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+}
+
+.main-team-logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    object-fit: contain;
+    background-color: #f2f5f9;
+}
+
+.main-team-info h2 {
+    color: var(--text-primary);
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.main-team-info p {
+    color: var(--text-muted);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.icon-small {
+    width: 14px;
+    height: 14px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.teams-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.team-card {
+    background-color: white;
+    border-radius: 16px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    
+    /* ADICIONA ESTAS DUAS LINHAS: */
+    text-decoration: none; 
+    color: inherit; 
+}
+
+.team-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.team-photo {
+    width: 70px;
+    height: 70px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.team-info h4 {
+    color: var(--text-primary);
+    font-size: 18px;
+    margin-bottom: 4px;
+}
+
+.team-info p {
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* =========================================
+   PAINEL DO GESTOR (O que faltava para não ficar "porcaria")
+   ========================================= */
+.gestor-panel {
+    background-color: white;
+    padding: 20px;
+    border-radius: 16px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    border-left: 4px solid var(--text-primary);
+}
+
+.add-team-form {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.custom-input {
+    padding: 12px 15px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    outline: none;
+    color: var(--text-primary);
+    font-size: 14px;
+    flex: 1;
+    min-width: 200px;
+    background-color: #f8fafc;
+}
+
+.btn-adicionar {
+    background-color: var(--text-primary);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-adicionar:hover {
+    background-color: #052654;
+}
+
+/* =========================================
+   MODAL (MINI CAIXA DE ÉPOCAS)
+   ========================================= */
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    display: none; /* Começa escondida */
+    justify-content: center; align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(3px); /* Desfoca o fundo do site */
+}
+
+.modal-content {
+    background: white; padding: 30px; border-radius: 16px;
+    width: 100%; max-width: 400px; position: relative; text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.close-modal {
+    position: absolute; top: 15px; right: 20px; font-size: 28px;
+    cursor: pointer; color: var(--text-muted); font-weight: bold;
+}
+
+.close-modal:hover { color: #d9534f; }
+
+.modal-img {
+    width: 100%; height: 180px; object-fit: cover;
+    border-radius: 12px; margin-bottom: 15px; background-color: #f2f5f9;
+}
+
+.modal-title { color: var(--text-primary); margin-bottom: 20px; font-size: 22px; }
+
+.seasons-list { display: flex; flex-direction: column; gap: 10px; }
+
+.season-btn {
+    background: #f1f5f9; padding: 12px; border-radius: 8px;
+    text-decoration: none; color: var(--text-primary); font-weight: 600;
+    transition: all 0.2s ease; border: 1px solid #e2e8f0;
+}
+
+.season-btn:hover { background: var(--bg-card-active); border-color: var(--text-primary); }
+
+
+/* =========================================
+   PÁGINA: DETALHES DA EQUIPA (PLANTEL E FOTO)
+   ========================================= */
+
+/* Caminho no topo (Breadcrumbs) */
+.breadcrumbs {
+    color: var(--text-primary);
+    font-weight: 700;
+    font-size: 16px;
+    margin-top: 20px;
+    margin-bottom: 25px;
+}
+
+/* Cabeçalho Novo (Com a Foto da Equipa) */
+.team-season-header {
+    background-color: white;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+}
+
+.team-season-photo {
+    width: 200px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 12px;
+    background-color: #f2f5f9;
+}
+
+.team-season-info h2 {
+    color: var(--text-primary);
+    font-size: 26px;
+    margin-bottom: 5px;
+}
+
+.team-season-info p {
+    color: var(--text-muted);
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* =========================================
+   TABELA DE JOGADORES E STAFF
+   ========================================= */
+.table-container {
+    background-color: white;
+    border-radius: 16px;
+    padding: 20px 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    overflow-x: auto; /* Se a tabela for muito larga, cria scroll horizontal */
+}
+
+.team-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.team-table th {
+    padding: 15px 10px;
+    border-bottom: 2px solid #e2e8f0; /* Linha mais grossa debaixo do cabeçalho */
+    color: var(--text-primary);
+    font-weight: 800;
+    font-size: 15px;
+}
+
+.team-table td {
+    padding: 15px 10px;
+    border-bottom: 1px solid #f1f5f9; /* Linha fina debaixo dos jogadores */
+    color: var(--text-primary);
+    font-weight: 500;
+    font-size: 14px;
+}
+
+/* Os SVG's de Editar e Apagar */
+.action-icons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+.action-icons svg {
+    width: 20px;
+    height: 20px;
+    fill: #94a3b8; /* Cor cinza por defeito */
+    cursor: pointer;
+    transition: fill 0.2s ease;
+}
+
+/* O Lápis fica azul ao passar o rato */
+.icon-edit:hover {
+    fill: var(--text-primary);
+}
+
+/* O Caixote do lixo fica vermelho ao passar o rato */
+.icon-delete:hover {
+    fill: #d9534f;
+}

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MNGR - Iniciar Sessão</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="icon" href="images/logo-mini.png" type="image/x-icon" />
+
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+  </head>
+  <body class="bg-auth">
+    <div id="fb-root"></div>
+
+    <div class="login-card">
+      <div class="logo">
+        <img src="images/MNGR_SemFundo.png" alt="MNGR Logo" class="logo-img" />
+      </div>
+
+      <form id="loginForm">
+        <div id="errorContainer" class="error-box" style="display: none">
+          <h4 class="error-title">Whoops! Algo de errado aconteceu.</h4>
+          <ul id="errorList" class="error-list"></ul>
+        </div>
+
+        <div class="input-group" id="group-username">
+          <span class="input-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24">
+              <path d="M12,12c3.309,0,6-2.691,6-6S15.309,0,12,0,6,2.691,6,6s2.691,6,6,6Zm0-11c2.757,0,5,2.243,5,5s-2.243,5-5,5-5-2.243-5-5S9.243,1,12,1Zm9,18v5h-1v-5c0-2.206-1.794-4-4-4H8c-2.206,0-4,1.794-4,4v5h-1v-5c0-2.757,2.243-5,5-5h8c2.757,0,5,2.243,5,5Z" />
+            </svg>
+          </span>
+          <input type="text" id="username" placeholder="Nome de utilizador ou email" required />
+        </div>
+
+        <div class="input-group" id="group-password">
+          <span class="input-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M19,8.276v-1.276c0-3.86-3.141-7-7-7S5,3.14,5,7v1.276c-1.742,.621-3,2.271-3,4.224v7c0,2.481,2.019,4.5,4.5,4.5h11c2.481,0,4.5-2.019,4.5-4.5v-7c0-1.953-1.258-3.602-3-4.224Zm-13-1.276c0-3.309,2.691-6,6-6s6,2.691,6,6v1.051c-.166-.019-.329-.051-.5-.051H6.5c-.171,0-.334,.032-.5,.051v-1.051Zm15,12.5c0,1.93-1.57,3.5-3.5,3.5H6.5c-1.93,0-3.5-1.57-3.5-3.5v-7c0-1.93,1.57-3.5,3.5-3.5h11c1.93,0,3.5,1.57,3.5,3.5v7Zm-8.5-5v3c0,.276-.224,.5-.5,.5s-.5-.224-.5-.5v-3c0-.276,.224-.5,.5-.5s.5,.224,.5,.5Z" />
+            </svg>
+          </span>
+          <input type="password" id="password" placeholder="Palavra-passe" required />
+        </div>
+
+        <button type="submit" class="btn-primary">Iniciar Sessão</button>
+      </form>
+
+      <div class="divider">ou</div>
+
+      <div class="google-wrapper" style="position: relative; margin-bottom: 12px">
+        <button class="btn-social" id="btnGoogle" type="button" style="width: 100%; margin-bottom: 0">
+          <img src="images/google.png" alt="Google" class="social-icon-img" />
+          Continuar com Google
+        </button>
+
+        <div
+          id="g_id_onload"
+          data-client_id="516899274419-9um1vevq6suhni345otfhm1bq87v7msh.apps.googleusercontent.com"
+          data-context="signin"
+          data-ux_mode="popup"
+          data-callback="handleCredentialResponse"
+          data-auto_prompt="false"
+        ></div>
+        <div
+          class="g_id_signin"
+          data-type="standard"
+          data-shape="rectangular"
+          data-theme="outline"
+          data-text="signin_with"
+          data-size="large"
+          data-logo_alignment="left"
+          style="
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            z-index: 10;
+            cursor: pointer;
+          "
+        ></div>
+      </div>
+
+      <button class="btn-social" id="btnFacebook" type="button">
+        <img src="images/facebook.png" alt="Facebook" class="social-icon-img" />
+        Continuar com Facebook
+      </button>
+
+      <p class="register-text">
+        Não tem conta? <a href="/mngr/register">Registe-se</a>
+      </p>
+
+      <div class="footer-links">
+        <a href="#">Termos de serviço</a>
+        <a href="#">Políticas de privacidade</a>
+      </div>
+    </div>
+
+    <script src="js/login.js"></script>
+  </body>
+</html>
