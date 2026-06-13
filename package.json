@@ -1,0 +1,36 @@
+{
+  "name": "hello-world",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.108.1",
+    "cookie-parser": "~1.4.4",
+    "cors": "^2.8.6",
+    "debug": "~2.6.9",
+    "dotenv": "^17.4.2",
+    "express": "~4.16.1",
+    "express-session": "^1.19.0",
+    "http-errors": "~1.6.3",
+    "jade": "~1.11.0",
+    "morgan": "~1.9.1",
+    "multer": "^2.1.1",
+    "pg": "^8.21.0"
+  },
+  "description": "",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DanielMorais44/Projeto-em-Aplica-es-Web---MNGR.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/DanielMorais44/Projeto-em-Aplica-es-Web---MNGR/issues"
+  },
+  "homepage": "https://github.com/DanielMorais44/Projeto-em-Aplica-es-Web---MNGR#readme"
+}

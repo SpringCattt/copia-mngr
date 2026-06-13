@@ -1,0 +1,358 @@
+/* ==========================================
+   MNGR - ESTILOS GERAIS DO CHAT
+   ========================================== */
+:root {
+    --bg-color: #f8fafc;
+    --sidebar-bg: #ffffff;
+    --chat-bg: #f1f5f9;
+    --border-color: #e2e8f0;
+    --text-primary: #1e293b;
+    --text-muted: #64748b;
+    --primary-color: #3b82f6;
+    --primary-hover: #2563eb;
+    --msg-sent: #3b82f6;
+    --msg-received: #ffffff;
+}
+
+/* 1. MATA O ESPAÇAMENTO DO CONTENTOR PAI (DASHBOARD) SÓ QUANDO O CHAT ESTÁ ABERTO */
+main:has(.chat-wrapper),
+div:has(> .chat-wrapper),
+section:has(.chat-wrapper) {
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+}
+
+/* 2. O CHAT PRINCIPAL ESTICADO ATÉ AOS EXTREMOS */
+.chat-wrapper {
+    display: flex;
+    width: 100%; /* Agora que o pai não tem padding, 100% cola às laterais */
+    height: calc(100vh - 70px); /* Ajusta os 70px consoante a altura da tua Navbar de topo */
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    margin: 0;
+}
+
+/* --- SIDEBAR DE CONVERSAS (BARRA ESQUERDA) --- */
+.chat-sidebar {
+    width: 320px;
+    background-color: var(--sidebar-bg);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-sidebar-header {
+    padding: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.sidebar-header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-right: 10px; /* Impede o botão de colar na margem direita */
+}
+
+.btn-new-chat {
+    background: transparent;
+    border: 1px solid #cbd5e1;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    flex-shrink: 0;
+    transition: 0.2s ease;
+}
+
+.btn-new-chat:hover {
+    background: #f1f5f9;
+    transform: scale(1.05);
+}
+
+.chat-search .search-input {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.chat-search .search-input:focus {
+    border-color: var(--primary-color);
+}
+
+.chat-list {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.chat-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.2s;
+}
+
+.chat-item:hover, .chat-item.active {
+    background-color: var(--chat-bg);
+}
+
+.chat-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.chat-item-content {
+    flex: 1;
+    overflow: hidden;
+}
+
+.chat-item-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.chat-name {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.chat-item-message p {
+    margin: 0;
+}
+
+/* --- ÁREA DE CHAT PRINCIPAL (MENSAGENS) --- */
+.chat-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--chat-bg);
+}
+
+.chat-area-header {
+    padding: 20px;
+    background-color: var(--sidebar-bg);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+}
+
+.chat-active-user {
+    display: flex;
+    align-items: center;
+}
+
+.chat-active-name {
+    margin: 0 0 4px 0;
+    font-size: 16px;
+    color: var(--text-primary);
+}
+
+.chat-history {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.message-bubble {
+    max-width: 65%;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    line-height: 1.4;
+    position: relative;
+    word-break: break-word;
+}
+
+.message-bubble.received {
+    align-self: flex-start;
+    background-color: var(--msg-received);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-bottom-left-radius: 4px;
+}
+
+.message-bubble.sent {
+    align-self: flex-end;
+    background-color: var(--msg-sent);
+    color: white;
+    border-bottom-right-radius: 4px;
+}
+
+.message-bubble p {
+    margin: 0 0 5px 0;
+}
+
+.message-time {
+    font-size: 11px;
+    opacity: 0.7;
+    display: block;
+    text-align: right;
+}
+
+.chat-input-area {
+    padding: 20px;
+    background-color: var(--sidebar-bg);
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    gap: 10px;
+}
+
+.message-input {
+    flex: 1;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+}
+
+.btn-send {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.btn-send:hover {
+    background-color: var(--primary-hover);
+}
+
+/* ==========================================
+   MODAL NOVA CONVERSA & LISTAS INTERNAS
+   ========================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(15, 23, 42, 0.6);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #ffffff;
+    width: 100%;
+    max-width: 450px;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.btn-close {
+    background: none; border: none; font-size: 18px;
+    cursor: pointer; color: var(--text-muted);
+    transition: 0.2s;
+}
+
+.btn-close:hover {
+    color: #ef4444; 
+}
+
+.novo-contacto-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 12px; border: 1px solid #e2e8f0;
+    border-radius: 8px; cursor: pointer; transition: 0.2s;
+}
+
+.novo-contacto-item:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+}
+
+/* ==========================================
+   CARDS DE DESPORTO (MODAL GESTOR)
+   ========================================== */
+.sport-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 20px 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.sport-card:hover {
+    background: #eff6ff;
+    border-color: #bfdbfe;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.sport-card-icon {
+    font-size: 28px;
+}
+
+.sport-card-title {
+    font-weight: 700;
+    color: #334155;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+/* Estilo para Scrollbar no Chat e Modal */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* --- BOLINHA DE MENSAGENS NÃO LIDAS --- */
+.unread-badge {
+    background-color: #ef4444; /* O tal vermelho de notificação */
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 12px;
+    min-width: 18px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(239, 68, 68, 0.2);
+}

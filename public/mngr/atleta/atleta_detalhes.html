@@ -1,0 +1,146 @@
+<div class="perfil-header-container">
+    <div class="perfil-header-info">
+        <h1 class="perfil-nome" id="detalhe-nome">A carregar...</h1>
+        <div class="perfil-quick-stats">
+            <div class="stat-item">
+                <span class="stat-label">Idade</span>
+                <span class="stat-value" id="detalhe-idade">-</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Modalidade</span>
+                <span class="stat-value" id="detalhe-modalidade">-</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Equipa</span>
+                <span class="stat-value" id="detalhe-equipa">-</span>
+            </div>
+        </div>
+    </div>
+    <div class="perfil-foto">
+        <img src="../images/placeholder.png" alt="Foto do Atleta" id="foto-atleta" onerror="this.src='https://dummyimage.com/200x200/e2e8f0/627d98.png&text=Foto';">
+    </div>
+</div>
+
+<div class="perfil-tabs-container">
+    
+    <div class="perfil-tabs">
+        <button class="tab-btn active" onclick="mudarSeparador('bio', this)">Biografia</button>
+        <button class="tab-btn" onclick="mudarSeparador('stats', this)">Estatísticas</button>
+    </div>
+    
+    <div class="perfil-tab-content">
+        
+        <div id="conteudo-bio">
+            <div class="bio-grid">
+                <div class="bio-item">
+                    <span class="bio-label">Data de Nascimento</span>
+                    <span class="bio-value" id="detalhe-nascimento">-</span>
+                </div>
+                <div class="bio-item">
+                    <span class="bio-label">Altura</span>
+                    <span class="bio-value" id="detalhe-altura">-</span>
+                </div>
+                <div class="bio-item">
+                    <span class="bio-label">Peso</span>
+                    <span class="bio-value" id="detalhe-peso">-</span>
+                </div>
+                <div class="bio-item">
+                    <span class="bio-label">Pé favorito</span>
+                    <span class="bio-value">Não definido</span>
+                </div>
+                <div class="bio-item">
+                    <span class="bio-label">No clube desde</span>
+                    <span class="bio-value">-</span>
+                </div>
+                <div class="bio-item">
+                    <span class="bio-label">Contrato até</span>
+                    <span class="bio-value">-</span>
+                </div>
+            </div>
+
+            <div class="contactos-section">
+                <h3 class="contactos-title">Contactos Pessoais</h3>
+                <div class="bio-grid">
+                    <div class="bio-item">
+                        <span class="bio-label">Email</span>
+                        <span class="bio-value" id="detalhe-email">Sem registo</span>
+                    </div>
+                    <div class="bio-item">
+                        <span class="bio-label">Telemóvel</span>
+                        <span class="bio-value">Sem registo</span>
+                    </div>
+                    <div class="bio-item" style="grid-column: span 2;">
+                        <span class="bio-label">Morada / Cidade</span>
+                        <span class="bio-value" id="detalhe-cidade">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-btn-container">
+                <button class="btn-edit">Editar Jogador</button>
+            </div>
+        </div>
+
+        <div id="conteudo-stats" style="display: none;">
+            
+            <div class="stats-grid-cards">
+                <div class="stat-card">
+                    <span class="stat-card-label">Jogos Jogados</span>
+                    <span class="stat-card-value" id="stat-jogos">0</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-card-label">Minutos Jogados</span>
+                    <span class="stat-card-value" id="stat-minutos">0</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-card-label">Golos</span>
+                    <span class="stat-card-value" id="stat-golos">0</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-card-label">Assistências</span>
+                    <span class="stat-card-value" id="stat-assists">0</span>
+                </div>
+            </div>
+
+            <div class="stats-table-wrapper">
+                <table class="stats-table">
+                    <thead>
+                        <tr>
+                            <th class="col-left">Competição</th>
+                            <th>Jogos</th>
+                            <th>Minutos</th>
+                            <th>Golos</th>
+                            <th>Assistências</th>
+                            <th>CA</th>
+                            <th>CV</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabela-stats-body">
+                        <tr>
+                            <td colspan="7" style="text-align: center; color: var(--text-muted); padding: 15px;">A carregar estatísticas...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    function mudarSeparador(separadorAlvo, botaoClicado) {
+        // 1. Esconder todos os conteúdos
+        document.getElementById('conteudo-bio').style.display = 'none';
+        document.getElementById('conteudo-stats').style.display = 'none';
+
+        // 2. Tirar a classe 'active' de todos os botões
+        const botoes = document.querySelectorAll('.tab-btn');
+        botoes.forEach(btn => btn.classList.remove('active'));
+
+        // 3. Mostrar o conteúdo alvo e colocar o botão clicado como ativo
+        document.getElementById('conteudo-' + separadorAlvo).style.display = 'block';
+        botaoClicado.classList.add('active');
+    }
+</script>
+
+<script src="/mngr/js/atleta_detalhes.js"></script>

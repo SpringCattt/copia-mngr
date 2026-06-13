@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MNGR - Criar Clube</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:wght=300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="icon" href="../images/logo-mini.png" type="image/x-icon" />
+  </head>
+  <body class="bg-auth">
+    <div class="login-card card-modo-largo" id="md-card">
+      <div class="logo">
+        <img
+          src="../images/MNGR_SemFundo.png"
+          alt="MNGR Logo"
+          class="logo-img"
+        />
+      </div>
+
+      <div id="passo-clube">
+        <h2
+          class="auth-title"
+          style="
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+          "
+        >
+          Registar Novo Clube
+        </h2>
+
+        <div
+          id="container-erro-clube"
+          style="
+            display: none;
+            background-color: #fef2f2;
+            border: 1px solid #fca5a5;
+            color: #b91c1c;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-size: 13px;
+          "
+        ></div>
+
+        <form id="form-criar-clube" enctype="multipart/form-data">
+          <div class="grid-form-detalhes">
+            <div class="input-group">
+              <label for="nome">Nome do Clube *</label>
+              <input
+                type="text"
+                id="nome"
+                name="nome"
+                class="main-input"
+                placeholder="Ex: FC Porto"
+                required
+              />
+            </div>
+
+            <div class="input-group">
+              <label for="data_fundacao">Data de Fundação *</label>
+              <input
+                type="date"
+                id="data_fundacao"
+                name="data_fundacao"
+                class="main-input"
+                min="1857-01-01"
+                required
+              />
+            </div>
+
+            <div class="input-group">
+              <label for="pais">País *</label>
+              <select id="pais" name="pais" class="main-input" required>
+                <option value="">Selecione um país...</option>
+              </select>
+            </div>
+
+            <div class="input-group">
+              <label for="regiao">Região / Distrito *</label>
+              <select id="regiao" name="regiao" class="main-input" required disabled>
+                <option value="">Selecione primeiro o país...</option>
+              </select>
+            </div>
+
+            <div class="input-group" style="grid-column: span 2;">
+              <label for="logo_file">Logótipo do Clube</label>
+              <div class="file-upload-wrapper">
+                <input
+                  type="file"
+                  id="logo_file"
+                  name="logo_file"
+                  class="file-input-hidden"
+                  accept="image/png, image/jpeg, image/webp"
+                />
+                <label for="logo_file" class="main-input file-upload-label">
+                  <span>Selecionar imagem...</span>
+                </label>
+              </div>
+            </div>
+
+            <div
+              class="input-group"
+              style="grid-column: span 2; display: flex; flex-direction: column"
+            >
+              <label for="descricao" style="margin-bottom: 8px"
+                >Descrição / História do Clube</label
+              >
+              <textarea
+                id="descricao"
+                name="descricao"
+                class="main-input custom-textarea"
+                placeholder="Breve resumo sobre a fundação, ambições ou conquistas do clube..."
+              ></textarea>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 15px; margin-top: 25px">
+            <a
+              href="/mngr/logout"
+              class="btn-secondary"
+              style="
+                flex: 1;
+                text-align: center;
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              "
+              >Sair</a
+            >
+            <button type="submit" class="btn-primary" style="flex: 2">
+              Criar e Avançar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="../js/criarClube.js"></script>
+  </body>
+</html>
