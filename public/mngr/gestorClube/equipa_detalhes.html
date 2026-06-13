@@ -1,0 +1,138 @@
+<div class="breadcrumbs">
+    Equipa &gt; <span id="breadcrumb-modalidade">Modalidade</span> &gt; <span id="breadcrumb-escalao">Escalão</span>
+</div>
+
+<div class="team-season-header">
+    <img src="" alt="Foto da Equipa" class="team-season-photo js-team-photo" onerror="this.onerror=null; this.src='https://dummyimage.com/200x120/e2e8f0/627d98.png&text=Foto+da+Equipa';">
+    
+    <div class="team-season-info">
+        <div class="team-title-container">
+            <h2 id="page-title">A carregar equipa...</h2>
+            <button type="button" id="btn-edit-team" title="Editar Informações da Equipa">
+                ✏️
+            </button>
+        </div>
+        
+        <div class="team-actions-container">
+            <div class="team-action-buttons">
+                <button type="button" id="btn-add-member" class="btn-adicionar" style="background-color: #627d98;">
+                    + Adicionar Membro
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h2 class="section-title">Equipa Técnica</h2>
+<div class="table-container">
+    <table class="team-table" id="tabela-plantel">
+        <thead>
+            <tr>
+                <th class="text-left">Nome / Utilizador</th>
+                <th>Idade</th>
+                <th>Cargo</th>
+                <th class="text-right">Ações</th>
+            </tr>
+        </thead>
+        <!-- 🌟 ADICIONAMOS AQUI O ID -->
+        <tbody id="table-equipa-tecnica"> 
+        </tbody>
+    </table>
+</div>
+
+<h2 class="section-title">Atletas</h2>
+<div class="table-container">
+    <table class="team-table" id="tabela-plantel">
+        <thead>
+            <tr>
+                <th class="text-left">Nome / Utilizador</th>
+                <th>Idade</th>
+                <th>Altura</th>
+                <th>Peso</th>
+                <th class="text-right">Ações</th>
+            </tr>
+        </thead>
+        <tbody id="table-atletas">
+        </tbody>
+    </table>
+</div>
+
+<div id="modal-editar-equipa" class="modal-overlay modal-escondido" style="display: none;">
+    <div class="modal-content">
+        <span class="close-modal" id="btn-fechar-editar">&times;</span>
+        <h3 class="modal-title">Editar Informações da Equipa</h3>
+        
+        <form id="form-editar-equipa" enctype="multipart/form-data" class="add-team-form">
+            <input type="text" id="edit-nome-equipa" name="nome" placeholder="Nome da Equipa" class="custom-input" required>
+            <input type="text" id="edit-epoca-equipa" name="epoca" placeholder="Época Corrente (Ex: 2025/2026)" class="custom-input" required>
+
+            <div class="file-input-container">
+                <p class="form-description">Alterar Foto da Equipa:</p>
+                <input type="file" id="edit-foto-equipa" name="foto_file" accept="image/*" class="custom-file-input">
+            </div>
+            
+            <button type="submit" class="btn-adicionar">
+                Guardar Alterações
+            </button>
+        </form>
+    </div>
+</div>
+
+<div id="add-member-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+        <span class="close-modal" id="close-member-modal">&times;</span>
+        <h3 class="modal-title">Adicionar Membro à Equipa</h3>
+
+        <div class="modal-tabs">
+            <button type="button" id="tab-new-account" class="btn-adicionar btn-tab-active">Criar Nova Conta</button>
+            <button type="button" id="tab-invite" class="btn-adicionar btn-tab-inactive">Convidar Existente</button>
+        </div>
+
+        <form id="form-new-account" class="add-team-form">
+            <input type="text" id="new-member-name" placeholder="Nome Completo" class="custom-input" required>
+            <input type="email" id="new-member-email" placeholder="Email" class="custom-input" required>
+            <input type="password" id="new-member-password" placeholder="Palavra-passe provisória" class="custom-input" required>
+            
+            <select id="new-member-role" class="custom-input" required>
+                <option value="" disabled selected>Escolha a Categoria (Cargo)</option>
+                <option value="Atleta">Atleta</option>
+                <option value="Treinador">Treinador</option>
+                <option value="Staff">Staff / Outro</option>
+            </select>
+
+            <button type="submit" class="btn-adicionar">Criar Conta e Associar</button>
+        </form>
+
+        <form id="form-invite" class="add-team-form" style="display: none;">
+            <p class="form-description">Envia um convite para a equipa usando o email de um utilizador registado na plataforma.</p>
+            
+            <input type="email" id="invite-member-email" placeholder="Email do Utilizador Registado" class="custom-input" required>
+            
+            <select id="invite-member-role" class="custom-input" required>
+                <option value="" disabled selected>Categoria do Convidado</option>
+                <option value="Atleta">Atleta</option>
+                <option value="Treinador">Treinador</option>
+                <option value="Staff">Staff / Outro</option>
+            </select>
+
+            <button type="submit" class="btn-adicionar btn-success-continue">Enviar Convite para a Equipa</button>
+        </form>
+    </div>
+</div>
+
+<div id="success-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-content modal-success-content">
+        <div class="success-icon-circle">
+            <svg viewBox="0 0 24 24" width="40" height="40" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+        </div>
+        
+        <h3 class="modal-success-title">Sucesso!</h3>
+        <p id="success-message" class="modal-success-message"></p>
+        
+        <button type="button" id="close-success-btn" class="btn-adicionar btn-success-continue">Continuar</button>
+    </div>
+</div>
+
+<script src="/mngr/js/equipa_detalhes.js"></script>

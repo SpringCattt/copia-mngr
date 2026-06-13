@@ -1,0 +1,72 @@
+<div class="breadcrumb">
+    <span class="breadcrumb-current">Gestão de Equipas</span>
+</div>
+
+<div class="card team-profile-card">
+    <div class="team-logo-wrapper">
+        <img src="" alt="Logo Clube" class="team-logo" id="clube-logo">
+    </div>
+    <div class="team-details">
+        <h1 class="team-name" id="clube-nome">A carregar clube...</h1>
+        <p class="team-info"><span class="icon-geo">📍</span> <span id="clube-localizacao"></span></p>
+    </div>
+</div>
+
+<div id="modalidades-container">
+    <p style="padding: 20px; color: gray; text-align: center;">A carregar equipas...</p>
+</div>
+
+<div id="painel-gestor" style="display: none; padding-top: 30px;">
+    <h2 class="section-title">Adicionar Nova Equipa</h2>
+    
+    <div class="card" style="background: #fff; border-radius: 8px;">
+        <form id="form-add-equipa" enctype="multipart/form-data">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                
+                <div class="form-group">
+                    <label for="nome-equipa" style="display:block; margin-bottom: 8px; font-weight: bold;">Nome da Equipa</label>
+                    <input type="text" id="nome-equipa" name="nome" required style="width:100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;" placeholder="Ex: Sub-19 Masculino A">
+                </div>
+
+                <div class="form-group">
+                    <label for="sport-select" style="display:block; margin-bottom: 8px; font-weight: bold;">Modalidade / Desporto</label>
+                    <select id="sport-select" name="id_tipo_desporto" required style="width:100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                        <option value="">A carregar desportos...</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="escalao-select" style="display:block; margin-bottom: 8px; font-weight: bold;">Escalão</label>
+                    <select id="escalao-select" name="id_tipo_escalao" required style="width:100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                        <option value="">A carregar escalões...</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="foto_file" style="display:block; margin-bottom: 8px; font-weight: bold;">Foto da Equipa</label>
+                    <div class="file-upload-wrapper">
+                        <input
+                            type="file"
+                            id="foto_file"
+                            name="foto_file"
+                            class="file-input-hidden"
+                            accept="image/png, image/jpeg, image/webp"
+                        />
+                        <label for="foto_file" class="main-input file-upload-label">
+                            <span>Selecionar imagem...</span>
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+
+            <div style="display: flex; justify-content: flex-end;">
+                <button type="submit" class="btn-primary" style="padding: 12px 25px; cursor: pointer; font-weight: bold;">
+                    Gravar Equipa
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="/mngr/js/equipas.js"></script>

@@ -1,0 +1,66 @@
+<div class="chat-wrapper">
+    <aside class="chat-sidebar">
+        <div class="chat-sidebar-header">
+            <div class="sidebar-header-top" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <h3 style="margin: 0; color: var(--text-primary); font-size: 18px;">Conversas</h3>
+                <button class="btn-new-chat" title="Nova Conversa">➕</button>
+            </div>
+            
+            <div class="chat-search">
+                <input type="text" placeholder="Pesquisar conversa..." class="search-input" id="pesquisaConversaAtiva">
+            </div>
+        </div>
+
+        <div class="chat-list"></div>
+    </aside>
+
+    <main class="chat-area">
+        <header class="chat-area-header">
+            <div class="chat-active-user">
+                <img src="../images/placeholder.png" alt="Foto" class="chat-avatar" id="active-avatar">
+                <div>
+                    <h3 class="chat-active-name">Seleciona uma conversa</h3>
+                    <span class="chat-status" style="color: var(--text-muted);">---</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="chat-history">
+            <div style="display: flex; height: 100%; align-items: center; justify-content: center; color: var(--text-muted);">
+                Seleciona alguém da lista para começar a falar.
+            </div>
+        </div>
+
+        <footer class="chat-input-area">
+            <input type="text" id="inputMensagem" placeholder="Escreve a tua mensagem aqui..." class="message-input">
+            <button class="btn-send">Enviar</button>
+        </footer>
+    </main>
+</div>
+
+<div id="modalNovaConversa" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 style="margin: 0; color: var(--text-primary);">Começar Nova Conversa</h3>
+            <button id="btnFecharModal" class="btn-close">✖</button>
+        </div>
+        
+        <div class="modal-body">
+            
+            <div id="modalNavHeader" style="display: none; margin-bottom: 15px; align-items: center; gap: 10px; padding-bottom: 10px; border-bottom: 1px solid #e2e8f0;">
+                <button id="btnVoltarDesportos" class="btn-icon" style="font-size: 20px; cursor: pointer; border: none; background: none; padding: 0;">⬅️</button>
+                <h4 id="tituloDesportoAtivo" style="margin: 0; color: var(--text-primary); text-transform: uppercase;">Desporto</h4>
+            </div>
+
+            <div id="gridDesportos" style="display: none; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px;">
+                </div>
+
+            <div id="listaNovosContactos" style="display: flex; flex-direction: column; gap: 8px; max-height: 350px; overflow-y: auto;">
+                <p style="font-size: 13px; color: var(--text-muted);">A carregar membros...</p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="../js/mensagens.js"></script>

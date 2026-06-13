@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MNGR - Mais Detalhes da Conta</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="icon" href="images/logo-mini.png" type="image/x-icon" />
+  </head>
+  <body class="bg-auth">
+
+    <div class="login-card" id="md-card">
+      <div class="logo">
+        <img src="images/MNGR_SemFundo.png" alt="MNGR Logo" class="logo-img" />
+      </div>
+
+      <div id="passo-categoria">
+        <h2 class="auth-title" style="text-align: center; margin-bottom: 20px; color: var(--text-primary);">Escolha o seu Perfil</h2>
+        <form id="form-escolha-categoria">
+          <div class="input-group">
+            <label for="select-categoria">Categoria de utilizador:</label>
+            <select id="select-categoria" class="main-input" required>
+              <option value="" disabled selected>Selecione uma opção...</option>
+              <option value="atleta">Atleta</option>
+              <option value="gestor">Gestor de Clube</option>
+              <option value="treinador">Treinador</option>
+            </select>
+          </div>
+          <button type="submit" class="btn-primary">Seguir</button>
+        </form>
+      </div>
+
+      <div id="passo-detalhes" style="display: none;">
+        <h2 class="auth-title" id="titulo-dinamico" style="text-align: center; margin-bottom: 25px; color: var(--text-primary);"></h2>
+        
+        <div id="container-erro-detalhes" style="display: none; background-color: #fef2f2; border: 1px solid #fca5a5; color: #b91c1c; padding: 12px; border-radius: 6px; margin-bottom: 15px; font-size: 13px;"></div>
+
+        <form id="form-dados-finais">
+          <div id="contentor-campos-dinamicos" class="grid-form-detalhes"></div>
+          
+          <div style="display: flex; gap: 15px; margin-top: 25px;">
+            <button type="button" id="btn-voltar" class="btn-secondary" style="flex: 1;">Voltar</button>
+            <button type="submit" class="btn-primary" style="flex: 2;">Submeter e Concluir</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+
+    <script src="js/maisdetalhes.js"></script>
+  </body>
+</html>

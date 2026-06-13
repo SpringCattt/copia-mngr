@@ -1,0 +1,115 @@
+<div class="cal-mngr-wrapper">
+    <div class="cal-mngr-header">
+        <div>
+            <span class="cal-mngr-subtitle">Calendário</span>
+            <h2 class="cal-mngr-title">Maio 2026</h2>
+        </div>
+        <div class="cal-mngr-filtro">
+            <label>Modalidade</label>
+            <select id="filtro-modalidade">
+                <option value="futebol">Futebol</option>
+                <option value="basquetebol">Basquetebol</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="cal-mngr-grid-container">
+        <div class="cal-mngr-dias">
+            <div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div><div>Dom</div>
+        </div>
+        <div class="cal-mngr-grid" id="grid-calendario"></div>
+    </div>
+
+    <div class="cal-mngr-footer">
+        <div class="cal-mngr-controles">
+            <button id="btn-prev-mes" class="cal-btn-icon">&lt;</button>
+            <button id="btn-next-mes" class="cal-btn-icon">&gt;</button>
+        </div>
+        
+        <button id="btn-abrir-modal" class="cal-mngr-btn cal-mngr-hidden">
+            + Adicionar Evento
+        </button>
+    </div>
+</div>
+
+<div id="modal-evento-mngr" class="modal-mngr-overlay cal-mngr-hidden">
+    <div class="modal-mngr-content">
+        <div class="modal-mngr-header-bg" style="text-align: center; color: white;">
+            <h3 style="margin: 0;">Novo Evento Desportivo</h3>
+        </div>
+
+        <form id="form-criar-evento">
+            <div class="modal-mngr-body-bg">
+                <div class="modal-row">
+                    <div class="modal-input-group">
+                        <label>Tipo de Evento</label>
+                        <select name="tipo_evento" id="select-tipo-evento" required>
+                            <option value="" disabled selected>Selecione...</option>
+                            <option value="treino_tatico">Treino Tático</option>
+                            <option value="treino_fisico">Treino Físico</option>
+                            <option value="treino_tecnico">Treino Técnico</option>
+                            <option value="jogo">Jogo</option>
+                            <option value="reuniao">Reunião</option>
+                            <option value="exame_fisico">Exame Físico</option>
+                            <option value="outro">Outro</option>
+                        </select>
+                    </div>
+                    <div class="modal-input-group">
+                        <label>Título do Evento</label>
+                        <input type="text" name="titulo" required>
+                    </div>
+                </div>
+
+                <div class="modal-row cal-mngr-hidden" id="campos-jogo">
+                    <div class="modal-input-group" style="flex-direction: row; align-items: center; gap: 10px; margin-top: 20px;">
+                        <input type="checkbox" name="oficial" id="chk-oficial" style="width: auto;">
+                        <label for="chk-oficial" style="margin:0;">Jogo Oficial</label>
+                    </div>
+                    <div class="modal-input-group">
+                        <label>Clube Rival</label>
+                        <select id="select-clube-rival">
+                            <option value="">Selecione o clube...</option>
+                            </select>
+                    </div>
+                    <div class="modal-input-group">
+                        <label>Escalão</label>
+                        <select name="id_equipa_rival" id="select-escalao-rival" disabled required>
+                            <option value="">Selecione primeiro o clube...</option>
+                            </select>
+                    </div>
+                </div>
+
+                <div class="modal-row cal-mngr-hidden" id="campos-treino">
+                    <div class="modal-input-group">
+                        <label>Duração (minutos)</label>
+                        <input type="number" name="duracao" min="1" placeholder="Ex: 90">
+                    </div>
+                </div>
+
+                <div class="modal-row">
+                    <div class="modal-input-group">
+                        <label>Hora de Início</label>
+                        <input type="time" name="hora_inicio" required>
+                    </div>
+                    <div class="modal-input-group">
+                        <label>A Nossa Equipa</label>
+                        <select name="id_equipa">
+                            <option value="1">AFC Richmond - Principal</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="modal-input-group">
+                    <label>Localização (Local)</label>
+                    <input type="text" name="local" required>
+                </div>
+            </div>
+
+            <textarea class="modal-textarea" name="descricao" placeholder="Adicionar descrição ou notas..." rows="3"></textarea>
+
+            <div class="modal-actions">
+                <button type="button" id="btn-fechar-modal" class="btn-cancelar">Cancelar</button>
+                <button type="submit" class="btn-confirmar">Criar Evento</button>
+            </div>
+        </form>
+<script src="/mngr/js/calendario.js"></script>

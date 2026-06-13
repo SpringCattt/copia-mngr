@@ -1,0 +1,251 @@
+/* --- UTILIDADES --- */
+.cal-mngr-hidden {
+    display: none !important;
+}
+
+/* --- ESTRUCTURA PRINCIPAL --- */
+.cal-mngr-wrapper {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    padding: 30px;
+    background-color: #f4f7f9;
+    height: 100%;
+    box-sizing: border-box;
+    color: #1e3a8a;
+}
+
+.cal-mngr-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 20px;
+}
+
+.cal-mngr-subtitle {
+    font-size: 14px;
+    font-weight: 700;
+    color: #64748b;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.cal-mngr-title {
+    font-size: 32px;
+    font-weight: 800;
+    margin: 0;
+}
+
+.cal-mngr-filtro {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cal-mngr-filtro label {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.cal-mngr-filtro select {
+    border: 1px solid #cbd5e1;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    color: #334155;
+    outline: none;
+    cursor: pointer;
+}
+
+/* --- GRILLA --- */
+.cal-mngr-grid-container {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.cal-mngr-dias {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    padding: 12px 0;
+    font-weight: 700;
+    border-bottom: 1px solid #e2e8f0;
+    background-color: #f8fafc;
+}
+
+.cal-mngr-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-auto-rows: minmax(100px, 1fr);
+}
+
+.cal-mngr-celda {
+    border-right: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 8px;
+    text-align: right;
+    font-weight: bold;
+    color: #475569;
+}
+
+/* --- FOOTER --- */
+.cal-mngr-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.cal-mngr-controles {
+    display: flex;
+    gap: 8px;
+}
+
+.cal-btn-icon {
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background: white;
+    cursor: pointer;
+    font-weight: bold;
+    color: #1e3a8a;
+}
+
+.cal-mngr-btn {
+    background-color: #0ea5e9;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.cal-mngr-btn:hover {
+    background-color: #0284c7;
+}
+
+/* --- MODAL --- */
+.modal-mngr-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 99999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-mngr-content {
+    background-color: #bac6d4;
+    padding: 24px;
+    border-radius: 12px;
+    width: 600px;
+    max-width: 90%;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.modal-mngr-header-bg, .modal-mngr-body-bg {
+    background-color: #475a6b;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.modal-mngr-header-bg { margin-bottom: 15px; }
+
+.modal-tabs {
+    display: flex;
+    gap: 10px;
+}
+
+.modal-tab {
+    flex: 1;
+    padding: 10px;
+    background: transparent;
+    color: white;
+    border: 1px solid #94a3b8;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.modal-tab.active {
+    background: white;
+    color: #1e293b;
+    border: none;
+}
+
+.modal-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.modal-row:last-child { margin-bottom: 0; }
+
+.modal-input-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-input-group label {
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.modal-input-group input, .modal-input-group select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.modal-textarea {
+    width: 100%;
+    padding: 15px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    background-color: #475a6b;
+    color: white;
+    resize: none;
+    margin-top: 15px;
+    box-sizing: border-box;
+}
+
+.modal-textarea::placeholder { color: #cbd5e1; }
+
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.btn-cancelar {
+    padding: 10px 30px;
+    background: #475a6b;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-confirmar {
+    padding: 10px 30px;
+    background: #0ea5e9;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+.dia-selecionado { border: 2px solid #0ea5e9; background-color: #e0f2fe !important; }

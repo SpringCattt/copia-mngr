@@ -1,0 +1,59 @@
+<div class="dashboard-atleta-container">
+    
+    <div class="perfil-card" style="background: var(--bg-surface); padding: 20px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+        <h1 id="dash-nome" style="margin: 0 0 5px 0;">Olá, Atleta!</h1>
+        <p style="color: var(--text-muted); margin: 0 0 15px 0;"><span id="dash-equipa">Sem equipa associada</span> • <span id="dash-modalidade">Futebol</span></p>
+        
+        <div style="display: flex; gap: 15px; font-size: 14px;">
+            <div style="background: #f1f5f9; padding: 5px 10px; border-radius: 6px;">Idade: <b id="dash-idade">19</b></div>
+            <div style="background: #f1f5f9; padding: 5px 10px; border-radius: 6px;">Altura: <b id="dash-altura">1.68m</b></div>
+            <div style="background: #f1f5f9; padding: 5px 10px; border-radius: 6px;">Peso: <b id="dash-peso">67kg</b></div>
+            <div style="background: #f1f5f9; padding: 5px 10px; border-radius: 6px;">Local: <b id="dash-cidade">Águeda</b></div>
+        </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+        
+        <div class="agenda-section">
+            <h3 style="border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; margin-bottom: 15px;">A Minha Agenda</h3>
+            
+            <div style="background: #e0f2fe; border-left: 4px solid #0284c7; padding: 15px; border-radius: 0 8px 8px 0; margin-bottom: 15px;">
+                <p style="font-size: 12px; font-weight: bold; color: #0284c7; margin: 0 0 5px 0; text-transform: uppercase;">Próximo Compromisso</p>
+                <h4 id="dash-prox-titulo" style="margin: 0 0 5px 0;">A carregar...</h4>
+                <p id="dash-prox-data" style="margin: 0; font-size: 13px; color: #475569;">...</p>
+            </div>
+
+            <div style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 15px; border-radius: 8px;">
+                <p style="font-size: 12px; font-weight: bold; color: #64748b; margin: 0 0 5px 0; text-transform: uppercase;">Último Jogo</p>
+                <h4 id="dash-ult-titulo" style="margin: 0 0 5px 0;">A carregar...</h4>
+                <p id="dash-ult-stats" style="margin: 0; font-size: 13px; color: #475569;">...</p>
+            </div>
+        </div>
+
+        <div class="stats-section">
+            <h3 style="border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; margin-bottom: 15px;">Resumo da Época</h3>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div style="background: var(--bg-surface); border: 1px solid #e2e8f0; padding: 20px; text-align: center; border-radius: 8px;">
+                    <h2 id="stat-jogos" style="margin: 0; color: #0f172a; font-size: 28px;">0</h2>
+                    <p style="margin: 5px 0 0 0; font-size: 13px; color: #64748b; text-transform: uppercase;">Jogos</p>
+                </div>
+                <div style="background: var(--bg-surface); border: 1px solid #e2e8f0; padding: 20px; text-align: center; border-radius: 8px;">
+                    <h2 id="stat-minutos" style="margin: 0; color: #0f172a; font-size: 28px;">0</h2>
+                    <p style="margin: 5px 0 0 0; font-size: 13px; color: #64748b; text-transform: uppercase;">Minutos</p>
+                </div>
+                <div style="background: var(--bg-surface); border: 1px solid #e2e8f0; padding: 20px; text-align: center; border-radius: 8px;">
+                    <h2 id="stat-golos" style="margin: 0; color: #0f172a; font-size: 28px;">0</h2>
+                    <p style="margin: 5px 0 0 0; font-size: 13px; color: #64748b; text-transform: uppercase;">Golos</p>
+                </div>
+                <div style="background: var(--bg-surface); border: 1px solid #e2e8f0; padding: 20px; text-align: center; border-radius: 8px;">
+                    <h2 id="stat-assists" style="margin: 0; color: #0f172a; font-size: 28px;">0</h2>
+                    <p style="margin: 5px 0 0 0; font-size: 13px; color: #64748b; text-transform: uppercase;">Assistências</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="../js/atleta_dashboard.js"></script>
