@@ -261,3 +261,9 @@
         grid-template-columns: repeat(2, 1fr);
     }
 }
+
+
+.card-evento-clicavel { transition: all 0.2s ease; display: block; text-decoration: none; background: #e0f2fe; border-left: 4px solid #0284c7; padding: 15px; border-radius: 0 8px 8px 0; margin-bottom: 15px; }
+.card-evento-clicavel:hover { background: #bae6fd; transform: translateX(4px); cursor: pointer; }
+
+            

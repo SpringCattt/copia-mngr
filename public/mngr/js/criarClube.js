@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 
                 // Validação imediata de tamanho no front-end (3MB)
                 if (ficheiro.size > 3 * 1024 * 1024) {
-                    alert("A imagem selecionada excede o limite máximo de 3MB.");
+                    mostrarAlerta("A imagem selecionada excede o limite máximo de 3MB.",'aviso');
                     fileInput.value = ""; // Limpa a seleção
                     fileLabelSpan.textContent = "Selecionar imagem...";
                     return;

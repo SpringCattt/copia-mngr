@@ -1,0 +1,465 @@
+/* public/mngr/css/estatisticas.css */
+* {
+    box-sizing: border-box;
+}
+
+.stats-container {
+    padding-bottom: 20px;
+}
+
+.stats-section-wrapper {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.stats-section-wrapper.active {
+    display: block;
+}
+
+/* =======================================================
+   Estrutura de Grelha Estilo Bootstrap (Resiliente ao Zoom)
+   ======================================================= */
+.row-mngr {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -10px;
+    margin-left: -10px;
+}
+
+.col-12-mngr, .col-md-6-mngr, .col-lg-8-mngr, .col-lg-7-mngr, .col-lg-6-mngr, .col-lg-5-mngr, .col-lg-4-mngr, .col-lg-3-mngr {
+    position: relative;
+    width: 100%;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin-bottom: 20px;
+}
+
+/* Dispositivos Móveis: 100% de largura por defeito (já aplicado acima) */
+.col-12-mngr {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+
+/* Tablets (A partir de 768px): Coloca 2 cartões lado a lado */
+@media (min-width: 768px) {
+    .col-md-6-mngr {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+/* PC e Ecrãs Grandes (A partir de 992px): Grelha completa */
+@media (min-width: 992px) {
+    .col-lg-8-mngr {
+        flex: 0 0 66.666667%;
+        max-width: 66.666667%;
+    }
+    .col-lg-7-mngr {
+        flex: 0 0 58.333333%;
+        max-width: 58.333333%;
+    }
+    .col-lg-6-mngr {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    .col-lg-5-mngr {
+        flex: 0 0 41.666667%;
+        max-width: 41.666667%;
+    }
+    .col-lg-4-mngr {
+        flex: 0 0 33.333333%;
+        max-width: 33.333333%;
+    }
+    /* ESTA ERA A REGRA EM FALTA PARA OS 4 CARTÕES DO ATLETA: */
+    .col-lg-3-mngr {
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
+}
+
+
+/* =======================================================
+   Cartões e UI
+   ======================================================= */
+.card-mngr {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 0; /* Sem isto, um cartão flex dentro de uma linha flex não encolhe corretamente e o conteúdo (ex: tabelas com scroll interno) fica cortado em vez de mostrar scroll */
+    word-wrap: break-word;
+    background-color: #ffffff;
+    background-clip: border-box;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+    height: 100%; /* Força os cartões a terem a mesma altura na linha */
+}
+
+.card-body-mngr {
+    flex: 1 1 auto;
+    min-height: 0; /* Permite que o filho com overflow-y:auto (tabela de histórico) calcule a sua altura real em vez de ser cortado pelo pai flex */
+    padding: 20px;
+    box-sizing: border-box;
+    min-width: 0; /* evita que tabelas largas empurrem o card para fora do grid */
+}
+
+/* KPI cards with icon need row direction; other cards use column */
+.card-body-mngr.kpi-card-body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-title-mngr {
+    margin: 0 0 15px 0;
+    font-size: 13px;
+    color: #1e293b;
+    border-bottom: 1px solid #f1f5f9;
+    padding-bottom: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+/* KPIs Superiores */
+.kpi-stat-num {
+    font-size: 28px;
+    font-weight: bold;
+    color: #0f172a;
+    margin: 5px 0 0 0;
+}
+
+.kpi-title-text {
+    margin: 0;
+    font-size: 11px;
+    color: #64748b;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.kpi-icon-circle {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    background: #f1f5f9;
+    flex-shrink: 0; /* Impede o ícone de ser esmagado */
+}
+
+/* Listas de Rankings */
+.top-list-mngr {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.top-item-mngr {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 13px;
+}
+
+.top-item-mngr:last-child {
+    border-bottom: none;
+}
+
+.top-rank-mngr {
+    font-weight: bold;
+    color: #94a3b8;
+    width: 25px;
+}
+
+.top-name-mngr {
+    flex-grow: 1;
+    font-weight: 500;
+    color: #334155;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 10px;
+}
+
+.top-score-mngr {
+    background: #f8fafc;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-weight: bold;
+    color: #0ea5e9;
+    white-space: nowrap;
+}
+
+/* --- BOTÕES DE TRANSIÇÃO (TOGGLE) --- */
+.mngr-toggle-wrapper {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+    background: #f1f5f9;
+    padding: 6px;
+    border-radius: 8px;
+    width: fit-content;
+}
+
+.mngr-toggle-btn {
+    padding: 10px 20px;
+    border: none;
+    background: transparent;
+    color: #64748b;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mngr-toggle-btn.active {
+    background: #ffffff;
+    color: #0ea5e9;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* --- BARRAS DE PROGRESSO CUSTOMIZADAS --- */
+.progress-container { margin-bottom: 12px; }
+.progress-labels { display: flex; justify-content: space-between; font-size: 12px; font-weight: bold; color: #334155; margin-bottom: 5px; }
+.progress-track { background: #e2e8f0; border-radius: 10px; height: 12px; width: 100%; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 10px; transition: width 0.5s ease-in-out; }
+
+/* Cores das Equipas (Igual à Imagem) */
+.bg-seniores { background-color: #f59e0b; } /* Laranja */
+.bg-sub18 { background-color: #dc2626; } /* Vermelho */
+.bg-sub16 { background-color: #0ea5e9; } /* Azul */
+
+/* --- TABELAS LIMPAS (RANKING) --- */
+.mngr-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; table-layout: auto; }
+.mngr-table th { padding: 10px 8px; border-bottom: 2px solid #e2e8f0; color: #1e293b; font-size: 12px; text-transform: uppercase; white-space: nowrap; }
+.mngr-table td { padding: 10px 8px; border-bottom: 1px solid #f1f5f9; color: #475569; }
+.mngr-table tr:last-child td { border-bottom: none; }
+.mngr-table strong { color: #0f172a; }
+
+/* table-responsive dentro de card-mngr: o card já fornece o contentor visual */
+.card-mngr .table-responsive {
+    border: none;
+    border-radius: 0;
+    margin-bottom: 0;
+}
+
+/* Estrutura extra para Listas Básicas */
+.simple-list { list-style: none; padding: 0; margin: 0; }
+.simple-list li { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f1f5f9; font-size: 13px; color: #334155; }
+.simple-list li:last-child { border-bottom: none; }
+
+/* =========================================================================
+   RANKING COM PÓDIO (TOP 3) + LISTA (ALINEACIÓN PERFECTA)
+   ========================================================================= */
+.ranking-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* Más espacio entre podio y la lista inferior */
+}
+
+.podium-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 8px;
+    margin-top: 10px;
+    margin-bottom: 15px; /* Espacio extra abajo para que respire la insignia */
+    min-height: 165px;
+}
+
+.podium-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    border-radius: 12px 12px 0 0;
+    padding: 15px 6px 20px 6px; /* Padding interno optimizado */
+    width: 32%;
+    position: relative;
+    border: 1px solid #e2e8f0;
+    border-bottom: none;
+    transition: transform 0.3s ease;
+}
+
+.podium-item:hover { transform: translateY(-4px); }
+
+/* Alturas e Cores do Pódio */
+.podium-item.rank-1 { z-index: 3; background: linear-gradient(to top, #fffbeb, #fef3c7); border-color: #fde68a; height: 145px; box-shadow: 0 -4px 15px rgba(245, 158, 11, 0.15); }
+.podium-item.rank-2 { z-index: 2; background: linear-gradient(to top, #f8fafc, #f1f5f9); border-color: #e2e8f0; height: 120px; box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.03); }
+.podium-item.rank-3 { z-index: 1; background: linear-gradient(to top, #fff7ed, #ffedd5); border-color: #fed7aa; height: 100px; box-shadow: 0 -4px 10px rgba(234, 88, 12, 0.08); }
+
+/* Medalla más grande e imponente */
+.podium-medal {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 900;
+    margin-bottom: 6px;
+    line-height: 1;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.12);
+}
+.rank-1 .podium-medal { background: linear-gradient(to bottom, #fbbf24, #d97706); color: #fff; }
+.rank-2 .podium-medal { background: linear-gradient(to bottom, #cbd5e1, #94a3b8); color: #fff; }
+.rank-3 .podium-medal { background: linear-gradient(to bottom, #fb923c, #c2410c); color: #fff; }
+
+/* Control para que nombres largos no rompan la tarjeta */
+.podium-name { 
+    font-weight: 800; 
+    color: #1e293b; 
+    font-size: 13px; 
+    margin-bottom: 2px; 
+    line-height: 1.2; 
+    width: 100%;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Máximo 2 líneas de nombre */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Control para nombres de equipo */
+.podium-team { 
+    font-size: 10px; 
+    color: #64748b; 
+    font-weight: 700; 
+    text-transform: uppercase; 
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    width: 95%;
+}
+
+/* Insignia de Puntuación flotando perfectamente en el borde inferior */
+.podium-score { 
+    background: white; 
+    padding: 4px 14px; 
+    border-radius: 20px; 
+    font-weight: 900; 
+    font-size: 13px; 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.08); 
+    position: absolute;
+    bottom: -14px; /* Flota exactamente en el límite */
+    white-space: nowrap;
+}
+
+.rank-1 .podium-score { color: #d97706; border: 1px solid #fde68a; }
+.rank-2 .podium-score { color: #64748b; border: 1px solid #e2e8f0; }
+.rank-3 .podium-score { color: #c2410c; border: 1px solid #fed7aa; }
+
+/* Lista do 4º em diante */
+.ranking-list { display: flex; flex-direction: column; gap: 6px; }
+.ranking-list-item { 
+    display: flex; align-items: center; justify-content: space-between; 
+    padding: 12px 15px; background: white; border: 1px solid #f1f5f9; 
+    border-radius: 8px; transition: background 0.2s;
+}
+.ranking-list-item:hover { background: #f8fafc; }
+.ranking-list-pos { font-weight: 800; color: #94a3b8; width: 30px; font-size: 13px; }
+.ranking-list-info { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
+.ranking-list-name { font-weight: 700; color: #334155; font-size: 13px; line-height: 1.2; }
+.ranking-list-team { font-size: 11px; color: #94a3b8; font-weight: 600; text-transform: uppercase; margin-top: 2px; }
+.ranking-list-score { font-weight: 800; color: #0ea5e9; background: #f0f9ff; padding: 4px 10px; border-radius: 6px; font-size: 13px; }
+
+/* =========================================================================
+   TABELAS DE ESTATÍSTICAS (Histórico de Treinos / Jogos)
+   estatisticas.html só carrega este ficheiro, por isso .stats-table
+   precisa de estilo próprio aqui (não pode depender de styles.css/atleta.css)
+   ========================================================================= */
+.stats-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    text-align: center;
+}
+
+.stats-table th {
+    background-color: #f8fafc;
+    color: #1e293b;
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    padding: 12px 10px;
+    border-bottom: 2px solid #e2e8f0;
+    white-space: nowrap;
+}
+
+.stats-table td {
+    padding: 12px 10px;
+    color: #475569;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: middle;
+}
+
+.stats-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.stats-table tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+.stats-table th.text-left,
+.stats-table td.text-left {
+    text-align: left;
+}
+
+/* Célula de Ações (botões Presenças/Feedback): usar vertical-align normal de
+   tabela em vez de display:flex na própria <td> — flex numa célula não
+   preenche a altura da linha quando outra célula (ex: Título) quebra texto,
+   o que desalinhava a borda inferior dessa célula em relação às restantes. */
+.stats-table td.stats-table-acoes {
+    white-space: nowrap;
+}
+
+.stats-table-acoes-wrap {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* =========================================================================
+   🆕 ESTATÍSTICAS AVANÇADAS DE JOGO (Remates, Posse, Faltas, Cantos, Foras)
+   ========================================================================= */
+.stats-medias-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.stats-medias-grid .stats-mini-kpi {
+    flex: 1;
+    min-width: 110px;
+    border-radius: 8px;
+    padding: 12px 10px;
+    text-align: center;
+}
+
+.stats-medias-grid .stats-mini-kpi-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.stats-medias-grid .stats-mini-kpi-valor {
+    font-size: 20px;
+    font-weight: 900;
+    line-height: 1;
+}

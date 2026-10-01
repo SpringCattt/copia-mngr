@@ -4,7 +4,10 @@
 
 <div class="card team-profile-card">
     <div class="team-logo-wrapper">
-        <img src="/assets/logos/richmond.png" alt="Logo Clube" class="team-logo logo-clube">
+        <div id="equipa-foto-wrapper" style="width: 80px; height: 80px; min-width: 80px; border-radius: 12px; border: 2px solid #e2e8f0; overflow: hidden; background: #f8fafc; display: flex; align-items: center; justify-content: center;">
+            <img id="equipa-foto" src="" alt="Logo Clube" class="logo-clube" style="width: 100%; height: 100%; object-fit: cover; display: none;">
+            <svg id="equipa-foto-placeholder" viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="#cbd5e1" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        </div>
     </div>
     <div class="team-details">
         <h1 class="team-name"></h1>
@@ -74,79 +77,32 @@
 </div>
 
 <h2 class="section-title">Estatísticas</h2>
-<div class="card stats-card">
-    <div class="table-selector">
-        <span>Tabela</span>
-        <i class="arrow-down">▼</i>
-    </div>
-
-    <div class="table-responsive">
-        <table class="stats-table">
-            <thead>
-                <tr>
-                    <th>Posição</th>
-                    <th class="text-left">Equipa</th>
-                    <th>Jogos</th>
-                    <th>Vitórias</th>
-                    <th>Empates</th>
-                    <th>Derrotas</th>
-                    <th>Golos Marcados</th>
-                    <th>Golos Sofridos</th>
-                    <th>Diferença de Golos</th>
-                    <th>Pontos</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="row-highlight">
-                    <td>1</td>
-                    <td class="text-left team-cell">
-                        <img src="" alt="" class="table-team-logo">
-                        AFC Richmond
-                    </td>
-                    <td>36</td><td>24</td><td>7</td><td>5</td><td>68</td><td>26</td><td>+42</td><td><strong>79</strong></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td class="text-left team-cell">
-                        <img src="" alt="" class="table-team-logo">
-                        Arsenal
-                    </td>
-                    <td>36</td><td>23</td><td>8</td><td>5</td><td>75</td><td>32</td><td>+43</td><td><strong>77</strong></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td class="text-left team-cell">
-                        <img src="" alt="" class="table-team-logo">Manchester City
-                    </td>
-                    <td>36</td><td>18</td><td>11</td><td>7</td><td>63</td><td>48</td><td>+15</td><td><strong>65</strong></td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td class="text-left team-cell">
-                        <img src="" alt="" class="table-team-logo">
-                        Manchester United
-                    </td>
-                    <td>36</td><td>17</td><td>8</td><td>11</td><td>60</td><td>48</td><td>+12</td><td><strong>59</strong></td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td class="text-left team-cell">
-                        <img src="" alt="" class="table-team-logo">
-                        Liverpool
-                    </td>
-                    <td>36</td><td>17</td><td>8</td><td>11</td><td>50</td><td>46</td><td>+4</td><td><strong>59</strong></td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td class="text-left team-cell">
-                        <img src="" alt="" class="table-team-logo">
-                        Aston Villa
-                    </td>
-                    <td>36</td><td>13</td><td>16</td><td>7</td><td>56</td><td>52</td><td>+4</td><td><strong>55</strong></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+<div class="table-selector">
+    <span id="standings-comp-label">Tabela</span>
+    <select id="standings-comp-select" class="table-selector-select" style="display:none;"></select>
+</div>
+<div class="table-responsive">
+    <table class="stats-table" style="width:100%;">
+        <thead>
+            <tr>
+                <th>Posição</th>
+                <th class="text-left">Equipa</th>
+                <th>Jogos</th>
+                <th>Vitórias</th>
+                <th>Empates</th>
+                <th>Derrotas</th>
+                <th>Golos Marcados</th>
+                <th>Golos Sofridos</th>
+                <th>Diferença de Golos</th>
+                <th>Pontos</th>
+            </tr>
+        </thead>
+        <tbody id="standings-body">
+            <tr id="standings-loading">
+                <td colspan="10" style="text-align:center; color:#94a3b8; padding:20px;">A carregar classificação...</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 
 <script src="/mngr/js/dashboard_dados.js"></script>

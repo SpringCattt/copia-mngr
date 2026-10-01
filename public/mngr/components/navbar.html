@@ -3,6 +3,8 @@
 </div>
 
 <div class="navbar-right">
+
+    <!-- ===== SINO: Notificações ===== -->
     <div style="position: relative;">
         <button class="icon-button notification-btn" id="btn-notificacoes" aria-label="Notificações" style="position: relative; cursor: pointer;">
             <svg class="menu-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -13,19 +15,34 @@
 
         <div id="dropdown-notificacoes" style="display: none; position: absolute; right: 0; top: 120%; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); width: 320px; z-index: 1000; overflow: hidden;">
             <div style="background-color: #f8fafc; padding: 12px 15px; border-bottom: 1px solid #e2e8f0; font-weight: 600; font-size: 14px; color: #334155;">
-                Convites Pendentes
+                Notificações
             </div>
-            <ul id="lista-notificacoes" style="list-style: none; padding: 0; margin: 0; max-height: 300px; overflow-y: auto;">
-                </ul>
+            <ul id="lista-notificacoes" style="list-style: none; padding: 0; margin: 0; max-height: 300px; overflow-y: auto;"></ul>
         </div>
     </div>
-    
+
+    <!-- ===== CARTA: Convites ===== -->
+    <div style="position: relative; margin-left: 8px;">
+        <button class="icon-button notification-btn" id="btn-convites" aria-label="Convites" style="position: relative; cursor: pointer;">
+            <svg class="menu-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20,4H4C2.9,4,2.01,4.9,2.01,6L2,18c0,1.1.9,2,2,2h16c1.1,0,2-.9,2-2V6C22,4.9,21.1,4,20,4Zm0,4-8,5L4,8V6l8,5,8-5v2Z"/>
+            </svg>
+            <span id="badge-convites" style="display: none; position: absolute; top: -2px; right: -2px; background-color: #ef4444; width: 10px; height: 10px; border-radius: 50%; border: 2px solid white;"></span>
+        </button>
+
+        <div id="dropdown-convites" style="display: none; position: absolute; right: 0; top: 120%; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); width: 320px; z-index: 1000; overflow: hidden;">
+            <div style="background-color: #f8fafc; padding: 12px 15px; border-bottom: 1px solid #e2e8f0; font-weight: 600; font-size: 14px; color: #334155;">
+                Convites Pendentes
+            </div>
+            <ul id="lista-convites" style="list-style: none; padding: 0; margin: 0; max-height: 300px; overflow-y: auto;"></ul>
+        </div>
+    </div>
+
+    <!-- ===== PERFIL ===== -->
     <div class="user-profile-wrapper" style="position: relative;">
         <div class="user-profile" id="userProfileBtn" style="cursor: pointer;">
-            <div class="profile-avatar">
-                <svg class="menu-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12,12c3.309,0,6-2.691,6-6S15.309,0,12,0,6,2.691,6,6s2.691,6,6,6Zm0-11c2.757,0,5,2.243,5,5s-2.243,5-5,5-5-2.243-5-5S9.243,1,12,1Zm9,18v5h-1v-5c0-2.206-1.794-4-4-4H8c-2.206,0-4,1.794-4,4v5h-1v-5c0-2.757,2.243-5,5-5h8c2.757,0,5,2.243,5,5Z"/>
-                </svg>
+            <div class="profile-avatar" id="nav-url-imagem">
+                <img src="" alt="Avatar" id="nav-avatar-imagem">
             </div>
             <span class="user-name" id="nav-nome-utilizador">A carregar...</span>
             <span class="dropdown-arrow">
@@ -38,7 +55,7 @@
 
         <div id="navProfileDropdown" class="profile-dropdown" style="display: none; position: absolute; right: 0; top: 110%; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 6px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); width: 150px; z-index: 999;">
             <ul style="list-style: none; padding: 5px 0; margin: 0;">
-                <li><a href="#" data-page="/mngr/dashboard/definicoes" style="display: block; padding: 10px 15px; color: #334155; text-decoration: none; font-size: 14px;">Perfil</a></li>
+                <li><a href="#" data-page="/mngr/perfil" style="display: block; padding: 10px 15px; color: #334155; text-decoration: none; font-size: 14px;">Perfil</a></li>
                 <li style="border-top: 1px solid #f1f5f9;"><a href="/mngr/logout" style="display: block; padding: 10px 15px; color: #b91c1c; text-decoration: none; font-size: 14px;">Logout</a></li>
             </ul>
         </div>

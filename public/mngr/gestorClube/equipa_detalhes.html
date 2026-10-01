@@ -1,5 +1,7 @@
 <div class="breadcrumbs">
-    Equipa &gt; <span id="breadcrumb-modalidade">Modalidade</span> &gt; <span id="breadcrumb-escalao">Escalão</span>
+    <a href="/mngr/gestorClube/equipas" class="breadcrumb-link">Equipas</a> 
+    <span class="breadcrumb-separator">&gt;</span>
+    <span id="breadcrumb-nome-equipa" class="breadcrumb-current">A carregar...</span>
 </div>
 
 <div class="team-season-header">
@@ -9,13 +11,13 @@
         <div class="team-title-container">
             <h2 id="page-title">A carregar equipa...</h2>
             <button type="button" id="btn-edit-team" title="Editar Informações da Equipa">
-                ✏️
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
             </button>
         </div>
         
         <div class="team-actions-container">
             <div class="team-action-buttons">
-                <button type="button" id="btn-add-member" class="btn-adicionar" style="background-color: #627d98;">
+                <button type="button" id="btn-add-member" class="btn-adicionar">
                     + Adicionar Membro
                 </button>
             </div>
@@ -34,7 +36,6 @@
                 <th class="text-right">Ações</th>
             </tr>
         </thead>
-        <!-- 🌟 ADICIONAMOS AQUI O ID -->
         <tbody id="table-equipa-tecnica"> 
         </tbody>
     </table>
@@ -57,6 +58,64 @@
     </table>
 </div>
 
+<div class="admin-desp-card" style="border: 2px dashed #cbd5e1; background: #f8fafc; margin-bottom: 20px; border-radius: 16px; padding: 24px 28px;" id="secao-criar-competicao">
+    <h3 class="admin-desp-titulo" style="color:#475a6b;">+ Adicionar Competição</h3>
+    <form id="form-add-competicao" enctype="multipart/form-data">
+        <input type="hidden" id="comp-id-equipa" name="id_equipa" value="">
+        <div class="form-competicao-grid" style="display:grid; grid-template-columns:1.5fr 1fr auto 80px 1fr auto; gap:10px; align-items:flex-end;">
+            
+            <div class="modal-input-group" style="margin:0;">
+                <label>Nome</label>
+                <input type="text" name="nome_competicao" id="comp-nome" class="jogo-input" placeholder="Ex: Liga Nacional..." required>
+            </div>
+            
+            <div class="modal-input-group" style="margin:0;">
+                <label>Tipo</label>
+                <select name="tipo_competicao" id="comp-tipo" class="jogo-input" required>
+                    <option value="" disabled selected>Formato...</option>
+                    <option value="liga">Liga</option>
+                    <option value="eliminatoria">Eliminatória</option>
+                    <option value="jogo_unico">Jogo Único</option>
+                    <option value="grupo_eliminatorias">Grupos + Eliminatórias</option>
+                </select>
+            </div>
+
+            <div class="modal-input-group" id="grupo-fase-inicial" style="margin:0; display:none;">
+                <label>Fase Inicial</label>
+                <select name="fase_inicial" id="comp-fase" class="jogo-input">
+                    <option value="grupos" id="opcao-fase-grupos">Fase de Grupos</option>
+                    <option value="128">Trinta e dois avos (1/128)</option>
+                    <option value="64">Dezanove avos (1/64)</option>
+                    <option value="32">Dezasseis avos (1/32)</option>
+                    <option value="16">Oitavos de Final (1/16)</option>
+                    <option value="8">Quartos de Final (1/8)</option>
+                    <option value="4">Meias-Finais</option>
+                    <option value="2">Final</option>
+                </select>
+            </div>
+            
+            <div class="modal-input-group" style="margin:0;">
+                <label>Nº Eq.</label>
+                <input type="number" name="num_equipas" id="comp-num" class="jogo-input" placeholder="Ex: 8" min="1" required>
+            </div>
+            
+            <div class="modal-input-group" style="margin:0;">
+                <label>Imagem</label>
+                <div class="file-upload-wrapper">
+                    <input type="file" id="comp-imagem" name="imagem_competicao" class="file-input-hidden" accept="image/png,image/jpeg,image/webp" required>
+                    <label for="comp-imagem" class="main-input file-upload-label" style="padding:8px 10px;">
+                        <span>Selecionar...</span>
+                    </label>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn-confirmar" style="white-space:nowrap; align-self:flex-end;">Criar Competição</button>
+        </div>
+    </form>
+</div>
+
+<div id="secao-competicoes" style="margin-top: 10px;"></div>
+
 <div id="modal-editar-equipa" class="modal-overlay modal-escondido" style="display: none;">
     <div class="modal-content">
         <span class="close-modal" id="btn-fechar-editar">&times;</span>
@@ -64,7 +123,6 @@
         
         <form id="form-editar-equipa" enctype="multipart/form-data" class="add-team-form">
             <input type="text" id="edit-nome-equipa" name="nome" placeholder="Nome da Equipa" class="custom-input" required>
-            <input type="text" id="edit-epoca-equipa" name="epoca" placeholder="Época Corrente (Ex: 2025/2026)" class="custom-input" required>
 
             <div class="file-input-container">
                 <p class="form-description">Alterar Foto da Equipa:</p>
@@ -96,11 +154,15 @@
             <select id="new-member-role" class="custom-input" required>
                 <option value="" disabled selected>Escolha a Categoria (Cargo)</option>
                 <option value="Atleta">Atleta</option>
-                <option value="Treinador">Treinador</option>
-                <option value="Staff">Staff / Outro</option>
+                <option value="Treinador">Treinador/Staff</option>
             </select>
 
-            <button type="submit" class="btn-adicionar">Criar Conta e Associar</button>
+            <div id="campo-nascimento-atleta" style="display: none;">
+                <label style="font-size: 13px; color: #64748b; margin-bottom: 4px; display: block;">Data de Nascimento</label>
+                <input type="date" id="new-member-nascimento" class="custom-input">
+            </div>
+
+<button type="submit" class="btn-adicionar">Criar Conta e Associar</button>
         </form>
 
         <form id="form-invite" class="add-team-form" style="display: none;">
@@ -112,7 +174,6 @@
                 <option value="" disabled selected>Categoria do Convidado</option>
                 <option value="Atleta">Atleta</option>
                 <option value="Treinador">Treinador</option>
-                <option value="Staff">Staff / Outro</option>
             </select>
 
             <button type="submit" class="btn-adicionar btn-success-continue">Enviar Convite para a Equipa</button>
@@ -132,6 +193,76 @@
         <p id="success-message" class="modal-success-message"></p>
         
         <button type="button" id="close-success-btn" class="btn-adicionar btn-success-continue">Continuar</button>
+    </div>
+</div>
+
+<div id="modal-trocar-treinador" class="modal-overlay" style="display: none;">
+    <div class="modal-content" style="max-width: 420px;">
+        <span class="close-modal" id="btn-fechar-trocar-treinador">&times;</span>
+        <h3 class="modal-title">Mover Treinador de Equipa</h3>
+        <p id="trocar-treinador-atual" style="color: #475569; margin-bottom: 16px; font-size: 13px;"></p>
+        <form id="form-trocar-treinador" class="add-team-form">
+            <input type="hidden" id="trocar-treinador-id">
+            <div class="modal-input-group">
+                <label>Mover para a equipa</label>
+                <select id="select-equipa-destino-treinador" class="custom-input" required>
+                    <option value="" disabled selected>A carregar...</option>
+                </select>
+            </div>
+            <button type="submit" class="btn-adicionar">Confirmar Mudança</button>
+        </form>
+    </div>
+</div>
+
+<div id="modal-editar-atleta" class="modal-overlay" style="display: none;">
+    <div class="modal-content" style="max-width: 360px;">
+        <span class="close-modal" id="btn-fechar-editar-atleta">&times;</span>
+        <h3 class="modal-title">Editar Atleta</h3>
+        <p id="editar-atleta-nome" style="color: #475569; margin-bottom: 16px; font-weight: 600;"></p>
+        <form id="form-editar-atleta" class="add-team-form">
+            <input type="hidden" id="editar-atleta-id">
+            <div class="modal-input-group">
+                <label>Altura (cm)</label>
+                <input type="number" id="editar-atleta-altura" class="custom-input" step="1" min="50" max="250" placeholder="Ex: 180" required>
+            </div>
+            <div class="modal-input-group">
+                <label>Peso (kg)</label>
+                <input type="number" id="editar-atleta-peso" class="custom-input" step="0.1" min="20" max="200" placeholder="Ex: 75.5" required>
+            </div>
+            <button type="submit" class="btn-adicionar">Guardar</button>
+        </form>
+    </div>
+</div>
+
+<div id="modal-confirmar-remover" class="modal-overlay" style="display: none;">
+    <div class="modal-content" style="max-width: 400px; text-align: center;">
+        <h3 class="modal-title">Remover Membro</h3>
+        <p id="confirmar-remover-texto" style="color: #475569; margin: 12px 0 24px;"></p>
+        <div style="display: flex; gap: 12px; justify-content: center;">
+            <button id="btn-cancelar-remover" class="btn-adicionar" style="background: #f1f5f9; color: #334155;">Cancelar</button>
+            <button id="btn-confirmar-remover" class="btn-adicionar" style="background: #ef4444; color: white;">Sim, remover</button>
+        </div>
+    </div>
+</div>
+
+<div id="modal-mudar-escalao" class="modal-overlay" style="display: none;">
+    <div class="modal-content" style="max-width: 440px;">
+        <span class="close-modal" id="btn-fechar-mudar-escalao">&times;</span>
+        <h3 class="modal-title">Mudar de Equipa</h3>
+        <p id="mudar-escalao-texto" style="color: #475569; margin: 12px 0 24px;"></p>
+        <form id="form-mudar-escalao" class="add-team-form">
+            <div class="modal-input-group">
+                <label>Nova Equipa / Escalão</label>
+                <select id="select-equipa-destino" class="custom-input" required>
+                    <option value="">A verificar requisitos...</option>
+                </select>
+                <p id="mudar-escalao-aviso" style="display:none; font-size:12px; color:#b45309; margin-top:6px;">⚠ Nenhuma equipa disponível para este atleta (verifica modalidade e idade).</p>
+            </div>
+            <div style="display: flex; gap: 12px; justify-content: center;">
+                <button id="btn-confirmar-mudar-escalao" class="btn-adicionar">Confirmar</button>
+                <button id="btn-cancelar-mudar-escalao" class="btn-adicionar" style="background:#f1f5f9; color:#334155;">Cancelar</button>
+            </div>
+        </form>
     </div>
 </div>
 

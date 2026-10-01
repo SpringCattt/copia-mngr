@@ -1,0 +1,358 @@
+<link rel="stylesheet" href="/mngr/css/admin.css">
+
+<div class="cal-mngr-wrapper" style="overflow-y: auto;">
+    <div class="cal-mngr-header">
+        <div>
+            <div class="breadcrumbs"><span class="breadcrumb-current cal-mngr-title">Gestão do Sistema</span></div>
+        </div>
+    </div>
+
+    <div id="sec-dashboard" class="admin-section active">
+        <div class="admin-stats-grid">
+            <div class="stat-card">
+                <h3 id="stat-atletas">0</h3>
+                <p>Atletas</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="stat-treinadores">0</h3>
+                <p>Treinadores</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="stat-gestores">0</h3>
+                <p>Gestores</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="stat-clubes">0</h3>
+                <p>Clubes Totais</p>
+            </div>
+        </div>
+
+        <h4 style="color: #475a6b; margin-top: 20px; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px;">Tempo Médio de Uso da Aplicação</h4>
+        <div class="admin-stats-grid">
+             <div class="stat-card secondary">
+                <h3 id="stat-tempo-atleta">0 min</h3>
+                <p>Média / Atleta</p>
+            </div>
+             <div class="stat-card secondary">
+                <h3 id="stat-tempo-treinador">0 min</h3>
+                <p>Média / Treinador</p>
+            </div>
+             <div class="stat-card secondary">
+                <h3 id="stat-tempo-gestor">0 min</h3>
+                <p>Média / Gestor</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="sec-utilizadores" class="admin-section">
+        <div class="admin-filters">
+            <input type="text" id="search-users" placeholder="Pesquisar por nome ou email...">
+            <select id="filter-role">
+                <option value="todos">Todos os Papéis</option>
+                <option value="atleta">Atletas</option>
+                <option value="treinador">Treinadores</option>
+                <option value="gestor">Gestores de Clube</option>
+                <option value="admin">Administradores</option>
+            </select>
+            <select id="filter-estado-users">
+                <option value="todos">Todos os Estados</option>
+                <option value="ativo">Ativos</option>
+                <option value="inativo">Inativos</option>
+            </select>
+            
+            <div style="display: flex; gap: 5px;">
+                <select id="orden-user" style="min-width: 180px;">
+                    <option value="alfabetica">A-Z (Alfabética)</option>
+                    <option value="rol">Por Função / Rol</option>
+                    <option value="data">Mais Recentes</option>
+                    <option value="estado">Por Estado (Ativos primeiro)</option>
+                    <option value="tempo">Por Tempo de Uso (Maior primeiro)</option>
+                </select>
+                
+                <button type="button" id="btn-toggle-ordem" title="Inverter Ordem" style="background: white; width: 40px; height: 40px; border: 1px solid #cbd5e1; border-radius: 6px; color: #475a6b; display: flex; justify-content: center; align-items: center; cursor: pointer;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s ease;">
+                        <path d="M12 5v14M19 12l-7 7-7-7"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="admin-table-container">
+            <table class="admin-table">
+                <thead>
+                    <tr><th>Nome</th><th>Email</th><th>Função</th><th>Tempo no App</th><th>Estado</th><th>Ações</th></tr>
+                </thead>
+                <tbody id="tbody-utilizadores">
+                    <tr><td colspan="6" style="text-align: center;">A carregar dados...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="sec-clubes" class="admin-section">
+        <div class="admin-filters">
+            <input type="text" id="search-clubs" placeholder="Pesquisar clube ou localização...">
+            <select id="filter-desporto-clubes">
+                <option value="todos">Todas as Modalidades</option>
+            </select>
+            <input type="text" id="filtro-clube-gestor" placeholder="Filtrar por nome do gestor...">
+            <select id="filtro-clube-ativo">
+                <option value="todos">Todos os Estados</option>
+                <option value="true">Ativos</option>
+                <option value="false">Inativos</option>
+            </select>
+        </div>
+
+        <div class="admin-table-container">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Clube</th>
+                        <th>Localização</th>
+                        <th>Gestor Responsável</th>
+                        <th>Estrutura Interna (Escalões / Equipas)</th>
+                        <th>Estado</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-clubes">
+                    <tr><td colspan="6" style="text-align: center;">A carregar dados...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="sec-desportos" class="admin-section">
+        <div id="desportos-lista"></div>
+    </div>
+
+    <div id="sec-escaloes" class="admin-section">
+        <div class="admin-desp-card" style="border: 2px dashed #cbd5e1; background: #f8fafc; margin-bottom: 20px;">
+            <h3 class="admin-desp-titulo" style="color:#475a6b;">+ Criar Novo Escalão</h3>
+            <div style="display:grid; grid-template-columns:1fr 1fr 1fr 80px 80px auto; gap:10px; align-items:flex-end;">
+                <div class="modal-input-group" style="margin:0;">
+                    <label>Nome</label>
+                    <input type="text" id="novo-escalao-nome" class="jogo-input" placeholder="Ex: Sub-19, Seniores...">
+                </div>
+                <div class="modal-input-group" style="margin:0;">
+                    <label>Desporto</label>
+                    <select id="novo-escalao-desporto" class="jogo-input">
+                        <option value="">A carregar...</option>
+                    </select>
+                </div>
+                <div class="modal-input-group" style="margin:0;">
+                    <label>Género</label>
+                    <select id="novo-escalao-genero" class="jogo-input">
+                        <option value="">Selecione...</option>
+                        <option value="1">Masculino</option>
+                        <option value="2">Feminino</option>
+                        <option value="3">Misto</option>
+                    </select>
+                </div>
+                <div class="modal-input-group" style="margin:0;">
+                    <label>Idade mín.</label>
+                    <input type="number" id="novo-escalao-idade-min" class="jogo-input" placeholder="Ex: 16" min="0">
+                </div>
+                <div class="modal-input-group" style="margin:0;">
+                    <label>Idade máx.</label>
+                    <input type="number" id="novo-escalao-idade-max" class="jogo-input" placeholder="Ex: 19" min="0">
+                </div>
+                <button class="btn-confirmar" id="btn-criar-escalao" style="white-space:nowrap; align-self:flex-end;">Criar Escalão</button>
+            </div>
+        </div>
+        <div id="escaloes-lista"></div>
+    </div>
+</div>
+
+<div id="modal-editar-escalao" class="modal-mngr-overlay cal-mngr-hidden" style="z-index: 999999;">
+    <div class="modal-mngr-content" style="width: 480px;">
+        <div class="modal-mngr-header-bg">
+            <h3>Editar Escalão</h3>
+        </div>
+        <form id="form-editar-escalao">
+            <input type="hidden" id="edit-esc-id">
+            <div class="modal-mngr-body-bg">
+                <div class="modal-input-group" style="margin-bottom:15px;">
+                    <label>Nome</label>
+                    <input type="text" id="edit-esc-nome" required>
+                </div>
+                <div class="modal-input-group" style="margin-bottom:15px;">
+                    <label>Desporto</label>
+                    <select id="edit-esc-desporto" required></select>
+                </div>
+                <div class="modal-input-group" style="margin-bottom:15px;">
+                    <label>Género</label>
+                    <select id="edit-esc-genero">
+                        <option value="1">Masculino</option>
+                        <option value="2">Feminino</option>
+                        <option value="3">Misto</option>
+                    </select>
+                </div>
+                <div style="display:flex; gap:12px;">
+                    <div class="modal-input-group" style="flex:1; margin-bottom:5px;">
+                        <label>Idade mínima</label>
+                        <input type="number" id="edit-esc-idade-min" min="0" max="99" placeholder="Ex: 14">
+                    </div>
+                    <div class="modal-input-group" style="flex:1; margin-bottom:5px;">
+                        <label>Idade máxima</label>
+                        <input type="number" id="edit-esc-idade-max" min="0" max="99" placeholder="Ex: 16">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="btn-cancelar" id="btn-cancelar-modal-escalao">Cancelar</button>
+                <button type="submit" class="btn-confirmar">Guardar Alterações</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="modal-editar-utilizador" class="modal-mngr-overlay cal-mngr-hidden" style="z-index: 999999;">
+    <div class="modal-mngr-content" style="width: 450px;">
+        <div class="modal-mngr-header-bg">
+            <h3>Editar Utilizador</h3>
+        </div>
+        
+        <form id="form-editar-utilizador">
+            <input type="hidden" id="edit-user-id">
+            
+            <div class="modal-mngr-body-bg">
+                <div class="modal-input-group" style="margin-bottom: 15px;">
+                    <label>Nome Completo</label>
+                    <input type="text" id="edit-user-nome" required>
+                </div>
+                <div class="modal-input-group" style="margin-bottom: 15px;">
+                    <label>Email</label>
+                    <input type="email" id="edit-user-email" required>
+                </div>
+                <div class="modal-input-group" style="margin-bottom: 5px;">
+                    <label>Função (Tipo de Conta)</label>
+                    <select id="edit-user-tipo" required>
+                        <option value="atleta">Atleta</option>
+                        <option value="treinador">Treinador</option>
+                        <option value="gestor">Gestor de Clube</option>
+                        <option value="admin">Administrador</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="btn-cancelar" onclick="document.getElementById('modal-editar-utilizador').classList.add('cal-mngr-hidden')">Cancelar</button>
+                <button type="submit" class="btn-confirmar">Guardar Alterações</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="modal-editar-clube" class="modal-mngr-overlay cal-mngr-hidden" style="z-index: 999999;">
+    <div class="modal-mngr-content" style="width: 500px;">
+        <div class="modal-mngr-header-bg">
+            <h3>Gestão do Clube</h3>
+            <p id="edit-clube-nome" style="text-align: center; margin: 5px 0 15px 0; font-size: 14px; color: #64748b; font-weight: 600;"></p>
+        </div>
+        
+        <div class="modal-mngr-body-bg">
+            <h4 style="color: #0a3d80; margin-bottom: 10px; font-size: 14px; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px;">Equipas Ativas</h4>
+            <ul id="lista-edit-equipas" style="list-style: none; padding: 0; margin: 0 0 20px 0; max-height: 150px; overflow-y: auto;">
+            </ul>
+
+            <h4 style="color: #0a3d80; margin-bottom: 10px; font-size: 14px; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px;">Escalões Ativos</h4>
+            <ul id="lista-edit-escaloes" style="list-style: none; padding: 0; margin: 0 0 15px 0; max-height: 150px; overflow-y: auto;">
+            </ul>
+        </div>
+
+        <div class="modal-actions">
+            <button type="button" class="btn-cancelar" onclick="document.getElementById('modal-editar-clube').classList.add('cal-mngr-hidden')">Fechar</button>
+        </div>
+    </div>
+</div>
+
+<div id="modal-ver-utilizador" class="modal-mngr-overlay cal-mngr-hidden" style="z-index: 999999;">
+    <div class="modal-mngr-content" style="width: 550px;">
+        <div class="modal-mngr-header-bg">
+            <h3>Perfil do Utilizador</h3>
+            <p id="detalhes-user-nome" style="text-align: center; margin: 5px 0 15px 0; font-size: 13px; color: #64748b; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;"></p>
+        </div>
+        
+        <form id="form-detalhes-utilizador">
+            <input type="hidden" id="detalhes-id-utilizador">
+            <input type="hidden" id="detalhes-tipo-utilizador">
+            
+            <div class="modal-mngr-body-bg">
+                
+                <div style="background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 20px;">
+                    <h4 style="color: #0a3d80; margin: 0 0 10px 0; font-size: 13px; border-bottom: 1px solid #cbd5e1; padding-bottom: 5px; text-transform: uppercase;">📍 Associações Atuais</h4>
+                    <ul id="lista-associacoes-user" style="list-style: none; padding: 0; margin: 0; max-height: 100px; overflow-y: auto; color: #334155; font-size: 13px;">
+                    </ul>
+                </div>
+
+                <div id="campos-dinamicos-perfil" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                </div>
+
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="btn-cancelar" onclick="document.getElementById('modal-ver-utilizador').classList.add('cal-mngr-hidden')">Cancelar</button>
+                <button type="submit" class="btn-confirmar">Guardar Alterações</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="modal-editar-clube" class="modal-mngr-overlay cal-mngr-hidden" style="z-index: 999999;">
+    <div class="modal-mngr-content" style="width: 500px; max-width: 90%;">
+        <div class="modal-mngr-header-bg" style="text-align: center; color: white; padding: 15px; border-radius: 8px 8px 0 0; margin-bottom: 15px;">
+            <h3 style="margin: 0; font-size: 18px;">Gestão do Clube</h3>
+            <p id="edit-clube-nome" style="margin: 5px 0 0 0; font-size: 14px; color: #cbd5e1;"></p>
+        </div>
+        
+        <div class="modal-mngr-body-bg" style="padding: 15px; background: #475a6b; border-radius: 8px;">
+            
+            <h4 style="color: white; margin-bottom: 10px; font-size: 14px;">Equipas Ativas</h4>
+            <ul id="lista-edit-equipas" style="list-style: none; padding: 0; margin: 0 0 15px 0; max-height: 150px; overflow-y: auto;">
+            </ul>
+
+            <h4 style="color: white; margin-bottom: 10px; font-size: 14px;">Escalões Ativos</h4>
+            <ul id="lista-edit-escaloes" style="list-style: none; padding: 0; margin: 0 0 15px 0; max-height: 150px; overflow-y: auto;">
+            </ul>
+
+        </div>
+
+        <div class="modal-actions" style="display: flex; justify-content: center; margin-top: 20px;">
+            <button type="button" class="btn-cancelar" style="background: #64748b;" onclick="document.getElementById('modal-editar-clube').classList.add('cal-mngr-hidden')">Fechar</button>
+        </div>
+    </div>
+</div>
+
+<div id="modal-ver-utilizador" class="modal-mngr-overlay cal-mngr-hidden" style="z-index: 999999;">
+    <div class="modal-mngr-content" style="width: 500px; max-width: 90%;">
+        <div class="modal-mngr-header-bg" style="text-align: center; color: white; padding: 15px; border-radius: 8px 8px 0 0; margin-bottom: 15px;">
+            <h3 style="margin: 0; font-size: 18px;">Perfil do Utilizador</h3>
+            <p id="detalhes-user-nome" style="margin: 5px 0 0 0; font-size: 13px; color: #cbd5e1; text-transform: uppercase; letter-spacing: 0.5px;"></p>
+        </div>
+        
+        <form id="form-detalhes-utilizador">
+            <input type="hidden" id="detalhes-id-utilizador">
+            <input type="hidden" id="detalhes-tipo-utilizador">
+            
+            <div class="modal-mngr-body-bg" style="padding: 15px; background: #475a6b; border-radius: 8px;">
+                
+                <div style="background: rgba(0,0,0,0.15); padding: 12px; border-radius: 6px; margin-bottom: 15px;">
+                    <h4 style="color: white; margin: 0 0 10px 0; font-size: 13px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 5px;">📍 ASSOCIAÇÕES ATUAIS</h4>
+                    <ul id="lista-associacoes-user" style="list-style: none; padding: 0; margin: 0; max-height: 100px; overflow-y: auto; color: #e2e8f0; font-size: 13px;">
+                    </ul>
+                </div>
+
+                <div id="campos-dinamicos-perfil" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                </div>
+
+            </div>
+
+            <div class="modal-actions" style="display: flex; gap: 10px; justify-content: center; margin-top: 20px;">
+                <button type="button" class="btn-cancelar" style="background: #64748b;" onclick="document.getElementById('modal-ver-utilizador').classList.add('cal-mngr-hidden')">Cancelar</button>
+                <button type="submit" class="btn-confirmar">Guardar Alterações</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="/mngr/js/admin_index.js"></script>

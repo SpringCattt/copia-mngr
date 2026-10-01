@@ -4,7 +4,7 @@
 :root {
     --bg-main: #f0f4f8;
     --card-bg: #ffffff;
-    --text-primary: #0a478f;
+    --text-primary: #0a478f !important;
     --text-secondary: #555555;
     --text-muted: #94a3b8;
     --accent-blue: #0056b3;
@@ -104,7 +104,7 @@
 /* Botões de Auth */
 .btn-primary {
     width: 100%;
-    background-color: #0f4a8a;
+    background-color: #0a478f;
     color: white;
     border: none;
     padding: 11px;
@@ -687,14 +687,56 @@
 
 .arrow-down { font-size: 0.75rem; }
 
+/* Select de competição dentro do pill .table-selector (ex: "Taça de Portugal").
+   appearance:none remove a borda/seta nativa do browser que ficava feia;
+   a seta é redesenhada com background SVG para manter o aspeto do pill. */
+.table-selector-select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin-left: 8px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23425b76' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: 14px;
+    padding-right: 20px;
+    color: var(--text-primary);
+    font-weight: 700;
+    font-size: inherit;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.table-selector-select:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.table-selector-select option {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
 .table-responsive, .table-container {
     background-color: white;
-    border-radius: 16px;
-    padding: 20px 30px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    border-radius: 10px;
+    padding: 0;
+    box-shadow: none;
+    border: 1px solid #e8edf3;
     overflow-x: auto;
     width: 100%;
+    box-sizing: border-box;
     margin-bottom: 30px;
+}
+
+.card .table-responsive,
+.card .table-container {
+    border: none;
+    border-radius: 0;
+    margin-bottom: 0;
 }
 
 /* 🌟 MERGE: Unificado as regras de .stats-table e .team-table */
@@ -734,10 +776,48 @@
 }
 
 .team-cell {
-    display: flex;
+    /* 🐛 CORREÇÃO: "display: flex" aqui transformava o <td> num flex container,
+       o que quebra o alinhamento vertical normal da célula dentro da <tr>
+       (faz a linha "Equipa" ficar ligeiramente mais alta/desalinhada que as
+       restantes células da mesma linha, que continuam com vertical-align
+       normal de tabela). Usamos inline-flex apenas no conteúdo, mantendo o
+       <td> como célula de tabela normal — assim a linha alinha-se com as
+       restantes colunas da mesma forma em todas as linhas. */
+    display: inline-flex;
     align-items: center;
     gap: 10px;
     color: var(--text-primary);
+    vertical-align: middle;
+}
+
+/* Para uso dentro de <td> no dashboard do atleta — evita overflow horizontal */
+.team-cell-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-primary);
+    max-width: 100%;
+}
+
+.team-logo-thumb {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    border-radius: 6px;
+    border: 1.5px solid #e2e8f0;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.team-logo-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.team-logo-empty {
+    background: #f8fafc;
 }
 
 .table-team-logo {
@@ -1457,4 +1537,174 @@ select.main-input option {
     color: #64748b !important;            /* Texto mais apagado/muted */
     border: 1px solid transparent;
     font-weight: 400;
+}
+
+#zona-clique-avatar:hover .avatar-overlay-upload {
+    display: flex !important;
+}
+
+.jogo-convocado-interactive-row {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    margin: 8px auto;
+    padding: 12px 20px;
+    text-align: center;
+    background-color: #f8fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #334155;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    user-select: none;
+  }
+
+  /* Quando a linha/label invisível for selecionada (Checked) */
+  .jogo-convocado-interactive-row:has(input:checked) {
+    background-color: #eff6ff;
+    border-color: #3b82f6;
+    color: #1d4ed8;
+    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.1);
+  }
+
+  .jogo-convocados-lista {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+.btn-acao-tabela {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #64748b;
+    padding: 4px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.15s;
+}
+.btn-editar-atleta:hover { color: #2563eb; }
+.btn-remover-membro:hover { color: #ef4444; }
+.btn-mudar-escalao:hover { color: #eab308; }
+
+/* =========================================
+   RESPONSIVIDADE MOBILE (≤768px)
+   ========================================= */
+@media (max-width: 768px) {
+    /* Breadcrumbs */
+    .breadcrumb, .breadcrumbs {
+        font-size: 20px;
+        margin-bottom: 18px;
+    }
+
+    /* Grids de equipas e eventos */
+    .teams-grid {
+        grid-template-columns: 1fr;
+    }
+    .events-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    /* KPI grid do dashboard do gestor (4 → 2 colunas) */
+    .kpi-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    /* Jogo card */
+    .game-match-card {
+        flex-direction: column;
+        padding: 20px;
+        gap: 12px;
+        align-items: center;
+    }
+    .team-badge {
+        height: 80px;
+    }
+    .team-title-match {
+        font-size: 20px;
+        text-align: center;
+    }
+    .match-score {
+        font-size: 38px;
+        margin-top: 8px;
+    }
+
+    /* Sistema de abas */
+    .tabs-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    .tabs-navigation {
+        flex-wrap: wrap;
+    }
+    .tab-btn {
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+    .tab-content-box {
+        padding: 20px 16px;
+        border-radius: 12px;
+    }
+
+    /* Modais: reduz padding e garante scroll */
+    .modal-content {
+        padding: 20px 16px;
+        margin: 12px;
+        width: calc(100% - 24px) !important;
+        max-width: calc(100% - 24px) !important;
+        max-height: 88vh;
+        overflow-y: auto;
+    }
+
+    /* Team season header (equipa_detalhes) */
+    .team-season-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .team-season-photo {
+        width: 100%;
+        height: 140px;
+    }
+    .team-season-info h2 {
+        font-size: 1.4rem;
+    }
+
+    /* Formulários com flex-wrap */
+    .add-team-form {
+        flex-direction: column;
+    }
+    .custom-input {
+        min-width: 0;
+    }
+
+    /* Grid da form de competição (5 colunas → 1) */
+    .form-competicao-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Section titles ligeiramente menores */
+    .section-title {
+        font-size: 1.2rem;
+    }
+
+    /* Ações da tabela — garante que ficam visíveis */
+    .action-icons {
+        gap: 10px;
+    }
+
+    /* Team actions no header da equipa */
+    .team-actions-container {
+        flex-wrap: wrap;
+    }
+    .team-action-buttons {
+        flex-wrap: wrap;
+        margin-left: 0;
+    }
 }

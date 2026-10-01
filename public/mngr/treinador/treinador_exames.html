@@ -1,0 +1,60 @@
+<link rel="stylesheet" href="/mngr/css/jogo.css" />
+
+<div class="jogo-container" style="max-width: 800px; margin: 20px auto; padding: 0 15px;">
+  
+  <div class="jogo-match-card" style="margin-bottom: 25px; flex-direction: column; align-items: flex-start; gap: 8px;">
+    <h2 class="jogo-team-name" style="font-size: 24px; text-transform: uppercase; display: flex; align-items: center; gap: 10px;">
+      <i class="fas fa-heartbeat" style="color: #8b5cf6;"></i> Avaliação Técnica & Exames Físicos
+    </h2>
+    <p style="color: var(--text-muted); font-size: 14px; margin: 0;">
+      Selecione o atleta e o tipo de teste para registar as métricas de performance desportiva.
+    </p>
+  </div>
+
+  <form id="formExameFisico" novalidate>
+    <div class="jogo-section-card">
+      <h3 class="jogo-section-title">Dados Gerais da Avaliação</h3>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 15px;">
+        
+        <div style="display: flex; flex-direction: column; gap: 5px;">
+          <label class="jogo-stats-team-label" style="text-align: left;" for="id_atleta">Atleta Avaliado</label>
+          <select id="id_atleta" name="id_atleta" class="jogo-input" style="width: 100%; height: 42px;" required>
+            <option value="">A carregar atletas da equipa...</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 5px; margin-bottom: 10px;">
+        <label class="jogo-stats-team-label" style="text-align: left;" for="tipo_exame">Tipo de Exame / Teste Físico</label>
+        <select id="tipo_exame" name="tipo_exame" class="jogo-input" style="width: 100%; height: 42px;" required>
+          <option value="" selected disabled>A carregar lista de exames...</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="contentor-campos-dinamicos" class="jogo-section-card" style="display: none; animation: fadeIn 0.3s ease;">
+      <h3 class="jogo-section-title" id="titulo-campos-dinamicos">Métricas do Resultado</h3>
+      <div id="zona-inputs-dinamicos" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px;">
+        </div>
+    </div>
+
+    <div class="jogo-section-card">
+      <h3 class="jogo-section-title">Observações Adicionais</h3>
+      <div style="display: flex; flex-direction: column; gap: 5px;">
+        <textarea id="observacoes" name="observacoes" class="jogo-input" rows="3" style="width: 100%; height: auto; padding: 10px;" placeholder="Ex: Atleta acusou algum cansaço residual ou dores musculares ligeiras..."></textarea>
+      </div>
+      
+      <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 20px;">
+        <button type="button" id="btn-cancelar" class="jogo-btn-primary" style="background-color: #64748b;">
+          Cancelar
+        </button>
+        <button type="submit" class="jogo-btn-primary">
+          <i class="fas fa-save"></i> Gravar Resultados
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script src="/mngr/js/exames_fisicos.js"></script>

@@ -1,0 +1,220 @@
+<div id="ecra-lista-treinos">
+    <div class="breadcrumb">
+        <span class="breadcrumb-current">Treinos e Assiduidade</span>
+    </div>
+    
+    <h2 class="section-title">A Decorrer</h2>
+    <div class="events-grid" id="grid-treinos-decorrer" style="margin-bottom: 30px;">
+        <p style="color: var(--text-muted);">A carregar eventos em curso...</p>
+    </div>
+
+    <h2 class="section-title">Histórico de Eventos</h2>
+    <div class="events-grid" id="grid-treinos-historico" style="max-height: 400px; overflow-y: auto; padding-right: 10px; padding-bottom: 10px;">
+        <p style="color: var(--text-muted);">A carregar histórico...</p>
+    </div>
+</div>
+
+<!-- ECRÃ DE REGISTO DE ASSIDUIDADE -->
+<div id="ecra-assiduidade" style="display: none;">
+    <div class="breadcrumb">
+        <a href="#" id="btn-voltar-lista" class="breadcrumb-link">Treinos</a> 
+        <span class="breadcrumb-separator">&gt;</span> 
+        <span class="breadcrumb-current" id="breadcrumb-titulo-treino">Registo de Assiduidade</span>
+    </div>
+
+    <!-- Tabs de navegação dentro do detalhe -->
+    <div style="display:flex; gap:8px; margin-bottom:20px; background:#f1f5f9; padding:5px; border-radius:8px; width:fit-content;">
+        <button id="tab-btn-presencas" class="tab-treino-btn"
+            style="padding:9px 18px; border:none; border-radius:6px; font-weight:bold; font-size:13px; cursor:pointer; background:white; color:#0ea5e9; box-shadow:0 1px 3px rgba(0,0,0,0.08);">
+            Presenças
+        </button>
+        <button id="tab-btn-feedback" class="tab-treino-btn"
+            style="padding:9px 18px; border:none; border-radius:6px; font-weight:bold; font-size:13px; cursor:pointer; background:transparent; color:#64748b;">
+            Feedback dos Atletas
+        </button>
+    </div>
+
+    <!-- TAB: PRESENÇAS -->
+    <div id="tab-presencas" class="card" style="padding: 25px;">
+
+        <!-- Identificação do Treino — redesenhada -->
+        <div style="display:flex; align-items:center; gap:14px; background:linear-gradient(135deg,#0ea5e9 0%,#0284c7 100%); border-radius:12px; padding:18px 22px; margin-bottom:28px; box-shadow:0 4px 14px rgba(14,165,233,0.18);">
+            <div style="background:rgba(255,255,255,0.18); border-radius:10px; width:44px; height:44px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+            </div>
+            <div style="flex:1; min-width:0;">
+                <p style="margin:0 0 2px; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:rgba(255,255,255,0.7);">Identificação do Treino</p>
+                <h3 id="input-treino-titulo-display" style="margin:0; font-size:17px; font-weight:800; color:white; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">—</h3>
+                <input type="hidden" id="input-treino-titulo">
+            </div>
+            <div style="text-align:right; flex-shrink:0;">
+                <p style="margin:0 0 2px; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:rgba(255,255,255,0.7);">Data</p>
+                <p id="input-treino-data-display" style="margin:0; font-size:14px; font-weight:700; color:white;">—</p>
+                <input type="hidden" id="input-treino-data">
+            </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+            <h2 class="section-title" style="margin: 0;">Plantel</h2>
+            <div class="input-group" style="margin: 0;">
+                <input type="text" id="pesquisa-atleta" class="main-input" style="width: 250px;" placeholder="Procurar atleta...">
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="stats-table" style="width:100%;">
+                <thead>
+                    <tr>
+                        <th class="text-left" style="padding-left:18px;">Atleta</th>
+                        <th style="width:180px;">Presença</th>
+                        <th style="padding-right:18px;">Notas</th>
+                    </tr>
+                </thead>
+                <tbody id="lista-atletas-chamada">
+                </tbody>
+            </table>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 15px; margin-top: 20px;">
+            <button id="btn-cancelar-chamada" class="btn-cancelar" style="padding: 10px 20px; border-radius: 6px; border: 1px solid #cbd5e1; background: white; cursor: pointer; font-weight: bold; color: #475569;">Voltar</button>
+            <button id="btn-submeter-chamada" class="btn-primary-action">Submeter Presenças</button>
+        </div>
+    </div>
+
+    <!-- TAB: FEEDBACK DOS ATLETAS -->
+    <div id="tab-feedback" style="display:none;">
+
+        <!-- Estado de carregamento -->
+        <div id="feedback-loading" style="text-align:center; padding:40px 20px;">
+            <p style="color:#94a3b8; font-size:14px;">A carregar feedback dos atletas...</p>
+        </div>
+
+        <!-- Conteúdo real do feedback (mostrado após carregamento) -->
+        <div id="feedback-conteudo" style="display:none;">
+            <!-- Resumo de feedback -->
+            <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:15px; margin-bottom:20px;" id="feedback-kpis">
+                <div class="card" style="padding:20px; text-align:center;">
+                    <p style="margin:0; font-size:11px; font-weight:bold; text-transform:uppercase; color:#64748b; letter-spacing:0.5px;">RPE Médio</p>
+                    <h2 id="feedback-rpe-medio" style="margin:8px 0 0; font-size:32px; font-weight:900; color:#ef4444;">—</h2>
+                    <p style="margin:2px 0 0; font-size:10px; color:#94a3b8;">Escala 1–10</p>
+                </div>
+                <div class="card" style="padding:20px; text-align:center;">
+                    <p style="margin:0; font-size:11px; font-weight:bold; text-transform:uppercase; color:#64748b; letter-spacing:0.5px;">Fadiga Média</p>
+                    <h2 id="feedback-fadiga-media" style="margin:8px 0 0; font-size:32px; font-weight:900; color:#f59e0b;">—</h2>
+                    <p style="margin:2px 0 0; font-size:10px; color:#94a3b8;">Escala 1–10</p>
+                </div>
+                <div class="card" style="padding:20px; text-align:center;">
+                    <p style="margin:0; font-size:11px; font-weight:bold; text-transform:uppercase; color:#64748b; letter-spacing:0.5px;">Sono Médio</p>
+                    <h2 id="feedback-sono-medio" style="margin:8px 0 0; font-size:32px; font-weight:900; color:#8b5cf6;">—</h2>
+                    <p style="margin:2px 0 0; font-size:10px; color:#94a3b8;">Escala 1–10</p>
+                </div>
+            </div>
+
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+                <h2 class="section-title" style="margin:0;">Respostas dos Atletas</h2>
+                <span id="feedback-total-respostas" style="font-size:13px; color:#64748b; background:#f1f5f9; padding:4px 12px; border-radius:20px; font-weight:bold;">0 respostas</span>
+            </div>
+
+            <!-- Sem respostas -->
+            <div id="feedback-sem-dados" style="display:none; text-align:center; padding:40px 20px;">
+                <p style="color:#94a3b8; font-style:italic; font-size:14px;">Nenhum atleta submeteu feedback para este treino ainda.</p>
+            </div>
+
+            <!-- Tabela de feedback -->
+            <div id="feedback-com-dados" style="display:none;">
+                <div class="table-responsive">
+                    <table class="stats-table" style="width:100%;">
+                        <thead>
+                            <tr>
+                                <th class="text-left">Atleta</th>
+                                <th style="text-align:center; width:80px;">RPE</th>
+                                <th style="text-align:center; width:80px;">Fadiga</th>
+                                <th style="text-align:center; width:80px;">Sono</th>
+                                <th>Observações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-feedback-atletas"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL DE FEEDBACK -->
+<div id="modal-feedback-treinos" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); z-index: 9999; align-items: center; justify-content: center; backdrop-filter: blur(2px);">
+    <div style="background: white; border-radius: 12px; padding: 40px 30px; text-align: center; width: 100%; max-width: 400px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);">
+        <div id="modal-feedback-icon" style="margin-bottom: 20px;"></div>
+        <h2 id="modal-feedback-titulo" style="font-size: 22px; font-weight: 800; color: #0f172a; margin-top: 0; margin-bottom: 12px;">Sucesso!</h2>
+        <p id="modal-feedback-mensagem" style="color: #334155; font-size: 15px; margin-bottom: 30px; line-height: 1.5;">Operação realizada com sucesso.</p>
+        <button id="btn-feedback-continuar" class="btn-primary-action" style="padding: 10px 35px; border-radius: 6px; font-size: 14px; font-weight: bold; width: auto; display: inline-block;">Continuar</button>
+    </div>
+</div>
+
+<style>
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+.rpe-badge { background:#fef3c7; color:#92400e; padding:3px 10px; border-radius:12px; font-weight:800; font-size:13px; display:inline-block; }
+.fadiga-badge { background:#fce7f3; color:#9d174d; padding:3px 10px; border-radius:12px; font-weight:800; font-size:13px; display:inline-block; }
+.sono-badge { background:#ede9fe; color:#6d28d9; padding:3px 10px; border-radius:12px; font-weight:800; font-size:13px; display:inline-block; }
+
+/* Treinos attendance table fixes */
+#lista-atletas-chamada tr {
+    border-bottom: 1px solid #f1f5f9;
+}
+#lista-atletas-chamada td {
+    vertical-align: middle;
+    padding: 10px 12px;
+}
+#lista-atletas-chamada td:first-child {
+    text-align: left;
+    padding-left: 18px;
+}
+#lista-atletas-chamada .atleta-cell-inner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+#lista-atletas-chamada .atleta-cell-inner img {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+#lista-atletas-chamada .select-estado {
+    width: 100%;
+    padding: 7px 10px;
+    margin: 0;
+    border-radius: 8px;
+    border: 1.5px solid #e2e8f0;
+    background: #f8fafc;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--text-primary);
+}
+#lista-atletas-chamada .nota-atleta {
+    width: 100%;
+    padding: 7px 10px;
+    margin: 0;
+    border-radius: 8px;
+    border: 1.5px solid #e2e8f0;
+    background: #f8fafc;
+    font-size: 13px;
+    color: var(--text-primary);
+    box-sizing: border-box;
+}
+#lista-atletas-chamada .nota-atleta:focus,
+#lista-atletas-chamada .select-estado:focus {
+    outline: none;
+    border-color: #0ea5e9;
+    background: white;
+}
+</style>
+
+<script src="/mngr/js/treinos.js"></script>

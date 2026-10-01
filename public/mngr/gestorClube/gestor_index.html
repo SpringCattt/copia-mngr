@@ -1,0 +1,59 @@
+<div class="breadcrumb">
+    <span class="breadcrumb-current">Dashboard do Clube</span>
+</div>
+
+<div class="card team-profile-card">
+    <div class="team-logo-wrapper">
+        <div id="clube-foto-wrapper" style="width: 80px; height: 80px; min-width: 80px; border-radius: 12px; border: 2px solid #e2e8f0; overflow: hidden; background: #f8fafc; display: flex; align-items: center; justify-content: center;">
+            <img id="clube-foto" src="" alt="Logo Clube" style="width: 100%; height: 100%; object-fit: cover; display: none;">
+            <svg id="clube-foto-placeholder" viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="#cbd5e1" stroke-width="1.5"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2z"/><path d="M12 2v20M2 12h20"/></svg>
+        </div>
+    </div>
+    <div class="team-details">
+        <h1 class="team-name" id="dash-nome-clube">A carregar...</h1>
+        <p class="team-info" id="dash-clube-info" style="color: var(--text-muted); margin: 0;"></p>
+    </div>
+</div>
+
+<h2 class="section-title">Visão Geral</h2>
+<div class="kpi-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 30px;">
+    <div class="card" style="padding: 20px; text-align: center; border-radius: 10px; margin: 0;">
+        <h2 id="kpi-equipas" style="margin: 0; font-size: 32px; color: #0f172a;">0</h2>
+        <p style="margin: 6px 0 0 0; font-size: 12px; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; font-weight: bold;">Equipas Ativas</p>
+    </div>
+    <div class="card" style="padding: 20px; text-align: center; border-radius: 10px; margin: 0;">
+        <h2 id="kpi-atletas" style="margin: 0; font-size: 32px; color: #0f172a;">0</h2>
+        <p style="margin: 6px 0 0 0; font-size: 12px; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; font-weight: bold;">Total de Atletas</p>
+    </div>
+    <div class="card" style="padding: 20px; text-align: center; border-radius: 10px; margin: 0;">
+        <h2 id="kpi-staff" style="margin: 0; font-size: 32px; color: #0f172a;">0</h2>
+        <p style="margin: 6px 0 0 0; font-size: 12px; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; font-weight: bold;">Staff Técnico</p>
+    </div>
+    <div class="card" style="padding: 20px; text-align: center; border-radius: 10px; margin: 0; border: 1px solid #e0e7ff; background: #f0f9ff;">
+        <h2 id="kpi-convites" style="margin: 0; font-size: 32px; color: #0284c7;">0</h2>
+        <p style="margin: 6px 0 0 0; font-size: 12px; color: #0369a1; text-transform: uppercase; letter-spacing: 0.05em; font-weight: bold;">Convites Pendentes</p>
+    </div>
+</div>
+
+<h2 class="section-title">Agenda Global do Clube (Próximos Jogos)</h2>
+<div class="events-grid" id="grid-agenda-global" style="margin-bottom: 30px;">
+    <p style="color: var(--text-muted);">A verificar calendário...</p>
+</div>
+
+<h2 class="section-title">Ponto de Situação das Equipas</h2>
+<div class="table-responsive">
+    <table class="stats-table" style="width: 100%;">
+        <thead>
+            <tr>
+                <th class="text-left">Escalão / Equipa</th>
+                <th>Equipa Técnica</th>
+                <th style="text-align: center;">Plantel</th>
+                <th>Próximo Jogo</th>
+            </tr>
+        </thead>
+        <tbody id="tabela-equipas-status">
+        </tbody>
+    </table>
+</div>
+
+<script src="/mngr/js/gestor_dashboard.js"></script>

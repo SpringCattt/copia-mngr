@@ -42,6 +42,7 @@ section:has(.chat-wrapper) {
     border-right: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
+    flex-shrink: 0;
 }
 
 .chat-sidebar-header {
@@ -148,6 +149,7 @@ section:has(.chat-wrapper) {
     display: flex;
     flex-direction: column;
     background-color: var(--chat-bg);
+    min-width: 0; /* evita que mensagens longas empurrem o layout em telas estreitas */
 }
 
 .chat-area-header {
@@ -156,6 +158,7 @@ section:has(.chat-wrapper) {
     border-bottom: 1px solid var(--border-color);
     display: flex;
     align-items: center;
+    gap: 10px;
 }
 
 .chat-active-user {
@@ -169,17 +172,81 @@ section:has(.chat-wrapper) {
     color: var(--text-primary);
 }
 
+/* Botão "voltar" à lista de conversas — só aparece em mobile (ver media query) */
+.btn-voltar-lista {
+    display: none;
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 4px 6px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    transition: background-color 0.2s;
+}
+
+.btn-voltar-lista:hover {
+    background-color: var(--chat-bg);
+}
+
 .chat-history {
     flex: 1;
     padding: 20px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 4px;
+}
+
+/* --- LINHA DE MENSAGEM (avatar + balão + botão responder) --- */
+.chat-message-row {
+    display: flex;
+    width: 100%;
+    margin-bottom: 11px;
+    align-items: flex-end;
+}
+
+.chat-message-row.linha-recebida {
+    justify-content: flex-start;
+}
+
+.chat-message-row.linha-enviada {
+    justify-content: flex-end;
+}
+
+.chat-message-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    margin-right: 8px;
+    align-self: flex-end;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.message-bubble-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    max-width: 75%;
+    transition: transform 0.15s ease-out;
+}
+
+.chat-message-row.linha-enviada .message-bubble-wrapper {
+    flex-direction: row-reverse;
+}
+
+.nome-remetente-grupo {
+    font-size: 10px;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 4px;
+    text-transform: uppercase;
 }
 
 .message-bubble {
-    max-width: 65%;
+    max-width: 100%;
     padding: 12px 16px;
     border-radius: 12px;
     font-size: 14px;
@@ -214,12 +281,150 @@ section:has(.chat-wrapper) {
     text-align: right;
 }
 
+/* Destaque temporário quando se navega até a mensagem original (clique na citação) */
+.chat-message-row.msg-destacada .message-bubble {
+    animation: destacarMensagem 1.2s ease;
+}
+
+@keyframes destacarMensagem {
+    0% { box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.6); }
+    100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
+
+/* --- BOTÃO "RESPONDER" NUMA MENSAGEM --- */
+.btn-responder-msg {
+    background: var(--sidebar-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    flex-shrink: 0;
+}
+
+/* Em desktop só mostra o botão quando se passa o rato pela mensagem */
+.chat-message-row:hover .btn-responder-msg {
+    opacity: 1;
+}
+
+.btn-responder-msg:hover {
+    transform: scale(1.1);
+    background-color: var(--chat-bg);
+}
+
+/* --- CITAÇÃO DA MENSAGEM ORIGINAL (quando se responde a algo) --- */
+.message-quote {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 6px 10px;
+    margin-bottom: 6px;
+    border-left: 3px solid var(--primary-color);
+    background-color: rgba(0, 0, 0, 0.04);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.message-bubble.sent .message-quote {
+    background-color: rgba(255, 255, 255, 0.18);
+    border-left-color: rgba(255, 255, 255, 0.8);
+}
+
+.message-quote:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+.message-bubble.sent .message-quote:hover {
+    background-color: rgba(255, 255, 255, 0.28);
+}
+
+.message-quote-nome {
+    font-weight: 700;
+    font-size: 11px;
+    color: var(--primary-color);
+}
+
+.message-bubble.sent .message-quote-nome {
+    color: #ffffff;
+}
+
+.message-quote-texto {
+    opacity: 0.85;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
+
+/* --- BARRA "A RESPONDER A..." POR CIMA DO INPUT --- */
+.reply-preview-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px 20px;
+    background-color: var(--sidebar-bg);
+    border-top: 1px solid var(--border-color);
+}
+
+.reply-preview-content {
+    flex: 1;
+    min-width: 0;
+    border-left: 3px solid var(--primary-color);
+    padding-left: 10px;
+}
+
+.reply-preview-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.reply-preview-text {
+    margin: 2px 0 0 0;
+    font-size: 13px;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.reply-preview-close {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text-muted);
+    flex-shrink: 0;
+    padding: 4px;
+    transition: color 0.2s;
+}
+
+.reply-preview-close:hover {
+    color: #ef4444;
+}
+
 .chat-input-area {
     padding: 20px;
     background-color: var(--sidebar-bg);
     border-top: 1px solid var(--border-color);
     display: flex;
     gap: 10px;
+}
+
+/* Quando a barra de resposta está visível, o input deixa de ter a sua própria borda
+   superior para não duplicar a separação visual */
+.reply-preview-bar[style*="flex"] + .chat-input-area {
+    border-top: none;
 }
 
 .message-input {
@@ -355,4 +560,86 @@ section:has(.chat-wrapper) {
     min-width: 18px;
     text-align: center;
     box-shadow: 0 2px 4px rgba(239, 68, 68, 0.2);
+}
+
+/* ==========================================
+   RESPONSIVIDADE / MOBILE
+   ==========================================
+   Em telas estreitas, a sidebar de conversas e a área de chat
+   competem pelo mesmo espaço. A solução: mostrar UMA de cada vez,
+   alternando com a classe ".mostrar-conversa" (controlada pelo JS
+   quando o utilizador abre/fecha uma conversa).
+*/
+@media (max-width: 768px) {
+    .chat-wrapper {
+        height: calc(100vh - 60px);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .chat-sidebar {
+        width: 100%;
+        flex-shrink: 0;
+    }
+
+    .chat-area {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transform: translateX(100%);
+        transition: transform 0.25s ease;
+        background-color: var(--chat-bg);
+    }
+
+    /* Quando uma conversa está selecionada, a área de chat entra
+       por cima e a sidebar fica escondida por trás */
+    .chat-wrapper.mostrar-conversa .chat-sidebar {
+        display: none;
+    }
+
+    .chat-wrapper.mostrar-conversa .chat-area {
+        transform: translateX(0);
+    }
+
+    .btn-voltar-lista {
+        display: flex;
+    }
+
+    .message-bubble-wrapper {
+        max-width: 85%;
+    }
+
+    /* Em mobile, o botão de responder fica sempre visível
+       (não há "hover" no toque) — o gesto principal aqui é o swipe */
+    .btn-responder-msg {
+        opacity: 1;
+        width: 24px;
+        height: 24px;
+        font-size: 11px;
+    }
+
+    .modal-content {
+        max-width: 92vw;
+        padding: 18px;
+    }
+
+    .reply-preview-bar,
+    .chat-input-area,
+    .chat-area-header,
+    .chat-history {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .message-bubble-wrapper {
+        max-width: 92%;
+    }
+
+    .chat-active-name {
+        font-size: 14px;
+    }
 }

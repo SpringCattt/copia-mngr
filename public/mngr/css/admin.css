@@ -1,0 +1,437 @@
+/* public/mngr/css/admin.css */
+
+/* =========================================================================
+   ESTILOS BASE HERDADOS (Paleta Premium do Calendário)
+   ========================================================================= */
+
+.admin-tabs { 
+    display: flex; 
+    gap: 12px; 
+    margin-bottom: 20px; 
+    border-bottom: 2px solid #e2e8f0; 
+    padding-bottom: 12px; 
+}
+
+.admin-tab { 
+    padding: 10px 22px; 
+    background: transparent; 
+    border: none; 
+    color: #64748b; 
+    font-weight: 700; 
+    cursor: pointer; 
+    font-size: 14px; 
+    border-radius: 8px; 
+    transition: all 0.2s ease;
+}
+
+.admin-tab:hover { 
+    background: #f0f9ff; 
+    color: #0ea5e9; 
+}
+
+/* Tab Ativa agora usa o azul escuro premium do cabeçalho dos modais */
+.admin-tab.active { 
+    background: #0a3d80; 
+    color: white; 
+    box-shadow: 0 4px 10px rgba(10, 61, 128, 0.2);
+}
+
+.admin-section { display: none; animation: fadeIn 0.4s ease; }
+.admin-section.active { display: block; }
+
+/* =========================================================================
+   FILTROS E PESQUISA (Baseado nos inputs do Modal do Calendário)
+   ========================================================================= */
+.admin-filters { 
+    display: flex; 
+    gap: 15px; 
+    margin-bottom: 24px; 
+    flex-wrap: wrap; 
+    align-items: center; 
+}
+
+.admin-filters input, .admin-filters select { 
+    padding: 12px 15px; 
+    border: 1px solid #e2e8f0; 
+    border-radius: 8px; 
+    outline: none; 
+    min-width: 220px; 
+    font-family: inherit;
+    color: #0a3d80;
+    font-size: 14px;
+    font-weight: 600;
+    background-color: #f8fafc;
+    transition: all 0.2s ease;
+}
+
+.admin-filters input:focus, .admin-filters select:focus {
+    border-color: #0a3d80;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(10, 61, 128, 0.05);
+}
+
+/* =========================================================================
+   TABELAS PREMIUM
+   ========================================================================= */
+.admin-table-container { 
+    background: white; 
+    border-radius: 12px; 
+    border: 1px solid #e2e8f0; 
+    overflow-x: auto; 
+    -webkit-overflow-scrolling: touch; /* Scroll suave no iOS */
+    box-shadow: 0 8px 30px rgba(10, 61, 128, 0.04); 
+}
+
+.admin-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    min-width: 800px; /* Força a tabela a manter a legibilidade, ativando o scroll horizontal do contentor */
+}
+
+.admin-table th, .admin-table td { 
+    padding: 16px 15px; 
+    text-align: left; 
+    border-bottom: 1px solid #f1f5f9; 
+    font-size: 13px; 
+    color: #475569; 
+}
+
+.admin-table th { 
+    background: #f8fafc; 
+    font-weight: 800; 
+    color: #0a3d80; 
+    text-transform: uppercase; 
+    font-size: 11px; 
+    letter-spacing: 0.5px; 
+    white-space: nowrap;
+}
+
+.admin-table tr:hover { 
+    background-color: #f0f9ff; 
+}
+
+/* =========================================================================
+   BADGES (ETIQUETAS VISUAIS)
+   ========================================================================= */
+.badge-role { 
+    padding: 5px 12px; 
+    border-radius: 12px; 
+    font-size: 11px; 
+    font-weight: 800; 
+    text-transform: uppercase; 
+    letter-spacing: 0.5px;
+    display: inline-block;
+}
+.role-atleta { background: #e0f2fe; color: #0284c7; }
+.role-treinador { background: #fef3c7; color: #b45309; }
+.role-gestor { background: #fce7f3; color: #be185d; }
+.role-admin { background: #f1f5f9; color: #0a3d80; }
+
+.badge-status { 
+    padding: 5px 12px; 
+    border-radius: 12px; 
+    font-size: 11px; 
+    font-weight: 800; 
+    text-transform: uppercase; 
+    display: inline-block;
+}
+.status-ativo { background: #dcfce7; color: #15803d; }
+.status-inativo { background: #fee2e2; color: #b91c1c; }
+
+/* =========================================================================
+   BOTÕES DE AÇÃO NA TABELA
+   ========================================================================= */
+.btn-action { 
+    padding: 8px 14px; 
+    border: none; 
+    border-radius: 6px; 
+    cursor: pointer; 
+    font-weight: 700; 
+    font-size: 12px; 
+    transition: all 0.2s ease; 
+}
+
+.btn-edit { 
+    background: #0a3d80; 
+    color: white; 
+    margin-right: 6px; 
+}
+.btn-edit:hover { 
+    background: #052654; 
+    box-shadow: 0 4px 10px rgba(10, 61, 128, 0.2);
+}
+
+.btn-toggle { background: #ef4444; color: white; }
+.btn-toggle:hover { background: #dc2626; box-shadow: 0 4px 10px rgba(239, 68, 68, 0.2); }
+.btn-toggle.ativar { background: #10b981; }
+.btn-toggle.ativar:hover { background: #059669; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.2); }
+
+/* =========================================================================
+   CARTÕES DO DASHBOARD (Métricas e KPI)
+   ========================================================================= */
+.admin-stats-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+    gap: 24px; 
+    margin-bottom: 35px; 
+}
+
+.stat-card { 
+    background: white; 
+    padding: 25px; 
+    border-radius: 14px; 
+    border: 1px solid #e2e8f0; 
+    text-align: center; 
+    box-shadow: 0 8px 30px rgba(10, 61, 128, 0.04); 
+    transition: transform 0.3s ease;
+}
+
+.stat-card:hover { transform: translateY(-3px); }
+
+.stat-card h3 { 
+    margin: 0; 
+    font-size: 36px; 
+    color: #0ea5e9; 
+    font-weight: 800; 
+}
+
+.stat-card p { 
+    margin: 8px 0 0; 
+    color: #627d98; 
+    font-weight: 700; 
+    font-size: 13px; 
+    text-transform: uppercase; 
+    letter-spacing: 1px;
+}
+
+.stat-card.secondary { 
+    background: #f4f7f9; 
+    border: 1px dashed #cbd5e1; 
+    box-shadow: none;
+}
+.stat-card.secondary:hover { transform: none; }
+.stat-card.secondary h3 { color: #0a3d80; font-size: 28px; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Desportos Config ── */
+.admin-desp-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 20px rgba(10,61,128,0.06);
+}
+.admin-desp-titulo {
+    font-size: 17px;
+    font-weight: 700;
+    color: #0a3d80;
+    margin: 0 0 16px 0;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #eff4fc;
+}
+.admin-desp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 4px;
+}
+.admin-desp-stats-titulo {
+    font-size: 14px;
+    font-weight: 700;
+    color: #0a3d80;
+    margin: 20px 0 10px 0;
+}
+.admin-desp-stats-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+.admin-desp-stat-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #334155;
+}
+.admin-desp-btn-rem {
+    background: none;
+    border: none;
+    color: #64748b;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.admin-desp-btn-rem:hover { color: #ef4444; }
+.admin-desp-btn-edit {
+    background: none;
+    border: none;
+    color: #64748b;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.admin-desp-btn-edit:hover { color: #2563eb; }
+.stat-row-ordem {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex-shrink: 0;
+}
+.stat-btn-ordem {
+    background: none;
+    border: 1px solid #e2e8f0;
+    border-radius: 3px;
+    color: #64748b;
+    cursor: pointer;
+    font-size: 9px;
+    line-height: 1;
+    padding: 2px 4px;
+}
+.stat-btn-ordem:hover:not(:disabled) { background: #e2e8f0; color: #0f172a; }
+.stat-btn-ordem:disabled { opacity: 0.3; cursor: default; }
+.stat-row-info {
+    flex: 1;
+    padding: 0 10px;
+}
+.stat-edit-fields input {
+    padding: 4px 8px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 13px;
+}
+.admin-desp-add-stat {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.admin-desp-add-stat .jogo-input { flex: 1; min-width: 140px; }
+
+
+/* =========================================================================
+   📱 RESPONSIVIDADE TOTAL (MOBILE & TABLETS)
+   ========================================================================= */
+@media screen and (max-width: 768px) {
+    
+    /* Título principal do Admin */
+    .cal-mngr-title {
+        font-size: 20px !important;
+    }
+
+    /* Ajustar o container para aproveitar ao máximo a tela */
+    .cal-mngr-wrapper {
+        padding: 10px;
+    }
+
+    /* Abas (Tabs) roláveis com o dedo em mobile */
+    .admin-tabs {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 8px;
+        -webkit-overflow-scrolling: touch;
+        border-bottom: 1px solid #e2e8f0;
+    }
+    
+    .admin-tabs::-webkit-scrollbar { height: 4px; }
+    .admin-tabs::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+
+    .admin-tab {
+        white-space: nowrap;
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+
+    /* Filtros 100% largura e empilhados */
+    .admin-filters {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .admin-filters input, .admin-filters select {
+        width: 100%;
+        min-width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Agrupador do botão Inverter Ordem com o Select */
+    .admin-filters > div[style*="display: flex"] {
+        width: 100%;
+    }
+    #orden-user {
+        flex: 1;
+        min-width: 0 !important;
+    }
+
+    /* Grid de Estatísticas: Adaptar as colunas para ecrãs muito pequenos */
+    .admin-stats-grid {
+        grid-template-columns: 1fr 1fr; /* Duas colunas em tablets/telemóveis grandes */
+        gap: 15px;
+    }
+
+    .stat-card h3 {
+        font-size: 28px;
+    }
+    
+    .stat-card.secondary h3 {
+        font-size: 22px;
+    }
+
+    .stat-card p {
+        font-size: 11px;
+    }
+
+    /* Ajustar botões das Tabelas para não encavalitarem */
+    .btn-action {
+        padding: 6px 10px;
+        font-size: 11px;
+        margin-bottom: 4px;
+        display: inline-block;
+    }
+
+    /* Formulários de Configuração de Desporto / Escalão em Mobile */
+    .admin-desp-card {
+        padding: 15px;
+    }
+
+    div[style*="grid-template-columns:1fr 1fr 1fr 80px 80px auto"] {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+
+    div[style*="grid-template-columns:1fr 1fr 1fr 80px 80px auto"] .btn-confirmar {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .admin-desp-add-stat {
+        flex-direction: column;
+    }
+    
+    .admin-desp-add-stat .jogo-input, .admin-desp-add-stat .btn-confirmar {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    /* Num telemóvel pequeno, os cartões de estatísticas ficam em 1 só coluna */
+    .admin-stats-grid {
+        grid-template-columns: 1fr;
+    }
+}

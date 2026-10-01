@@ -1,35 +1,367 @@
-<div class="breadcrumb">
-    <a href="#" data-page="/mngr/dashboard/treinador/treinador_index" class="breadcrumb-link">Calendário</a> 
-    <span class="breadcrumb-separator">&gt;</span> 
-    <span class="breadcrumb-current">Jogo Casa - FC Porto</span>
+<!-- public/mngr/views/jogo.html -->
+<link rel="stylesheet" href="/mngr/css/jogo.css" />
+
+<div class="breadcrumbs">
+  <a href="#" data-page="/mngr/dashboard/calendario" class="breadcrumb-link"
+    >Calendário</a
+  >
+  <span class="breadcrumb-separator">/</span>
+  <span class="breadcrumb-current" id="jogo-breadcrumb-titulo">Jogo</span>
 </div>
 
-<div class="game-match-card">
-    <div class="team-side">
-        <img src="../images/AFC_Richmond.png" alt="EQUIPA A LOGO" class="team-badge">
-        <h3 class="team-title-match">EQUIPA A</h3>
+<div class="jogo-match-card">
+  <div class="jogo-team-side">
+    <img id="jogo-logo-nossa" src="" alt="Equipa" class="jogo-team-logo" />
+    <h3 class="jogo-team-name" id="jogo-nome-nossa">-</h3>
+  </div>
+
+  <div
+    class="jogo-center"
+    style="display: flex; flex-direction: column; align-items: center"
+  >
+    <div
+      id="jogo-competicao-container"
+      class="cal-mngr-hidden"
+      style="
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background: rgba(0, 0, 0, 0.05);
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #1e293b;
+        margin-bottom: 12px;
+        max-width: 100%;
+      "
+    >
+      <span id="jogo-competicao-nome">-</span>
+      <img
+        id="jogo-competicao-imagem"
+        src=""
+        alt="Comp"
+        style="
+          max-width: 40px;
+          max-height: 40px;
+          width: auto;
+          height: auto;
+          object-fit: contain;
+          border-radius: 4px;
+        "
+      />
     </div>
 
-    <div class="match-details-center">
-        <span class="match-date">17 de Maio 2026, 19h00</span>
-        <span class="match-location">LOCAL</span>
-        <div class="match-score">-</div>
+    <span class="jogo-meta-info" id="jogo-data">--/--/---- --h--</span>
+    <div class="jogo-score" id="jogo-score">
+      <span id="jogo-golos-nossa">-</span>
+      <span class="jogo-score-sep">:</span>
+      <span id="jogo-golos-adversario">-</span>
     </div>
+    <span class="jogo-meta-info jogo-local" id="jogo-local">-</span>
 
-    <div class="team-side">
-        <img src="../images/FC_Porto.png" alt="EQUIPA B LOGO" class="team-badge">
-        <h3 class="team-title-match">EQUIPA B</h3>
+    <div
+      class="jogo-meta-badges"
+      style="
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 6px;
+        flex-wrap: wrap;
+      "
+    >
+      <span class="jogo-oficial-tag cal-mngr-hidden" id="jogo-oficial-tag"
+        >Oficial</span
+      >
+      <button
+        id="btn-gerar-relatorio"
+        class="cal-mngr-hidden"
+        style="
+          background-color: #dc2626;
+          color: white;
+          border: none;
+          padding: 6px 14px;
+          border-radius: 20px;
+          font-size: 0.9rem;
+          font-weight: 600;
+          cursor: pointer;
+          display: inline-flex;
+          align-items: center;
+          gap: 5px;
+          transition: background 0.2s;
+        "
+      >
+        📄 Gerar Relatório
+      </button>
     </div>
+  </div>
+
+  <div class="jogo-team-side">
+    <img
+      id="jogo-logo-adversario"
+      src=""
+      alt="Adversário"
+      class="jogo-team-logo"
+    />
+    <h3 class="jogo-team-name" id="jogo-nome-adversario">-</h3>
+  </div>
 </div>
 
-<div class="tabs-container">
-    <div class="tabs-navigation">
-        <button class="tab-btn active">Convocatória</button>
-        <button class="tab-btn">Dados do jogo</button>
-    </div>
-    
-    <button class="btn-primary-action">Nova Convocatoria</button>
+<div class="jogo-section-card" id="secao-convocatoria">
+  <h3 class="jogo-section-title" style="text-align: center">
+    Convocatória para o Jogo
+  </h3>
+
+  <div
+    id="lista-convocados"
+    class="jogo-convocados-lista"
+    style="margin-bottom: 16px"
+  >
+    <p class="jogo-pre-jogo-msg" id="msg-sem-convocados">
+      Nenhum jogador foi convocado para este jogo ainda.
+    </p>
+  </div>
 </div>
 
-<div class="tab-content-box">
+<div id="secao-pos-jogo" class="cal-mngr-hidden">
+  <!-- Secção de Golos -->
+  <div class="jogo-section-card">
+    <h3 class="jogo-section-title" id="titulo-secao-golos">Golos</h3>
+
+    <div id="lista-golos" class="jogo-golos-lista"></div>
+
+    <!-- Formulário envolvido e com id/classe para controlo do JS -->
+    <div id="form-adicionar-golo" class="jogo-adicionar-golo jogo-form-golo">
+      <h4 class="jogo-subsection-title">Adicionar Golo</h4>
+      <div class="jogo-golo-form">
+        <div class="jogo-form-group">
+          <label>Equipa</label>
+          <select id="golo-equipa-tipo" class="jogo-input">
+            <option value="nossa">Nossa Equipa</option>
+            <option value="adversario">Adversário</option>
+          </select>
+        </div>
+        <div class="jogo-form-group" id="golo-nossa-grupo">
+          <label>Marcador</label>
+          <select id="golo-atleta-select" class="jogo-input">
+            <option value="">Selecione o atleta...</option>
+          </select>
+        </div>
+        <div class="jogo-form-group cal-mngr-hidden" id="golo-adversario-grupo">
+          <label>Nome do Marcador</label>
+          <input
+            type="text"
+            id="golo-adversario-nome"
+            class="jogo-input"
+            placeholder="Nome do jogador adversário..."
+          />
+        </div>
+        <div class="jogo-form-group" id="golo-assistente-nossa-grupo">
+          <label>Assistência (opcional)</label>
+          <select id="golo-assistente-select" class="jogo-input">
+            <option value="">Sem assistência</option>
+          </select>
+        </div>
+        <div
+          class="jogo-form-group cal-mngr-hidden"
+          id="golo-assistente-adversario-grupo"
+        >
+          <label>Assistência (opcional)</label>
+          <input
+            type="text"
+            id="golo-assistente-nome"
+            class="jogo-input"
+            placeholder="Nome do assistente..."
+          />
+        </div>
+        <div class="jogo-form-group">
+          <label>Minuto</label>
+          <input
+            type="number"
+            id="golo-minuto"
+            class="jogo-input"
+            placeholder="Ex: 45"
+            min="1"
+            max="120"
+          />
+        </div>
+        <div
+          class="jogo-form-group"
+          style="flex: 0; min-width: auto; justify-content: flex-end"
+        >
+          <label style="white-space: nowrap">
+            <input
+              type="checkbox"
+              id="golo-autogolo"
+              style="margin-right: 5px"
+            />Autogolo
+          </label>
+        </div>
+        <button class="jogo-btn-primary" id="btn-adicionar-golo">
+          + Adicionar Golo
+        </button>
+      </div>
     </div>
+
+    <!-- Formulário de Penalidade (mesmo card dos golos) -->
+    <div id="lista-penalidades" style="display: none"></div>
+    <div id="form-adicionar-penalidade" class="jogo-adicionar-golo">
+      <h4 class="jogo-subsection-title">Registar Penalidade</h4>
+      <div class="jogo-golo-form">
+        <div class="jogo-form-group">
+          <label>Equipa</label>
+          <select id="pen-equipa-tipo" class="jogo-input">
+            <option value="nossa">Nossa Equipa</option>
+            <option value="adversario">Adversário</option>
+          </select>
+        </div>
+        <div class="jogo-form-group" id="pen-nossa-grupo">
+          <label>Cobrador</label>
+          <select id="pen-atleta-select" class="jogo-input">
+            <option value="">Selecione o atleta...</option>
+          </select>
+        </div>
+        <div class="jogo-form-group cal-mngr-hidden" id="pen-adversario-grupo">
+          <label>Nome do Cobrador</label>
+          <input
+            type="text"
+            id="pen-adversario-nome"
+            class="jogo-input"
+            placeholder="Nome do jogador adversário..."
+          />
+        </div>
+        <div class="jogo-form-group">
+          <label>Minuto</label>
+          <input
+            type="number"
+            id="pen-minuto"
+            class="jogo-input"
+            placeholder="Ex: 45"
+            min="1"
+            max="120"
+          />
+        </div>
+        <div
+          class="jogo-form-group"
+          style="flex: 0; min-width: auto; justify-content: flex-end"
+        >
+          <label style="white-space: nowrap">
+            <input
+              type="checkbox"
+              id="pen-convertida"
+              style="margin-right: 5px"
+            />Convertida
+          </label>
+        </div>
+        <button class="jogo-btn-primary" id="btn-adicionar-penalidade">
+          + Registar Penalidade
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Secção de Cartões -->
+  <div id="secao-cartoes">
+    <div class="jogo-section-card">
+      <h3 class="jogo-section-title">Cartões</h3>
+      <div id="lista-cartoes"></div>
+
+      <!-- Formulário envolvido e com id/classe para controlo do JS -->
+      <div
+        id="form-adicionar-cartao"
+        class="jogo-adicionar-golo jogo-form-cartao"
+      >
+        <h4 class="jogo-subsection-title">Registar Cartão</h4>
+        <div class="jogo-golo-form">
+          <div class="jogo-form-group">
+            <label>Equipa</label>
+            <select id="cartao-equipa-tipo" class="jogo-input">
+              <option value="nossa">Nossa Equipa</option>
+              <option value="adversario">Adversário</option>
+            </select>
+          </div>
+          <div class="jogo-form-group" id="cartao-nossa-grupo">
+            <label>Jogador</label>
+            <select id="cartao-atleta-select" class="jogo-input">
+              <option value="">Selecione o atleta...</option>
+            </select>
+          </div>
+          <div
+            class="jogo-form-group cal-mngr-hidden"
+            id="cartao-adversario-grupo"
+          >
+            <label>Nome do Jogador</label>
+            <input
+              type="text"
+              id="cartao-adversario-nome"
+              class="jogo-input"
+              placeholder="Nome do jogador..."
+            />
+          </div>
+          <div class="jogo-form-group">
+            <label>Tipo</label>
+            <select id="cartao-tipo" class="jogo-input">
+              <option value="amarelo">🟨 Amarelo</option>
+              <option value="vermelho">🟥 Vermelho</option>
+            </select>
+          </div>
+          <div class="jogo-form-group">
+            <label>Minuto</label>
+            <input
+              type="number"
+              id="cartao-minuto"
+              class="jogo-input"
+              placeholder="Ex: 45"
+              min="1"
+              max="120"
+            />
+          </div>
+          <button class="jogo-btn-primary" id="btn-adicionar-cartao">
+            + Registar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Minutos Jogados -->
+  <div class="jogo-section-card">
+    <h3 class="jogo-section-title">Minutos Jogados</h3>
+    <div id="lista-atleta-stats" class="jogo-atleta-stats-lista"></div>
+    <button
+      class="jogo-btn-primary"
+      id="btn-guardar-atleta-stats"
+      style="margin-top: 12px"
+    >
+      Guardar Minutos
+    </button>
+  </div>
+
+  <!-- Estatísticas Gerais -->
+  <div class="jogo-section-card">
+    <h3 class="jogo-section-title">Estatísticas da Equipa</h3>
+    <div class="jogo-stats-header">
+      <span class="jogo-stats-team-label" id="stats-label-nossa">-</span>
+      <span></span>
+      <span class="jogo-stats-team-label" id="stats-label-adversario">-</span>
+    </div>
+    <div class="jogo-stats-lista" id="stats-lista"></div>
+    <button
+      class="jogo-btn-primary"
+      id="btn-guardar-stats"
+      style="margin-top: 16px"
+    >
+      Guardar Estatísticas
+    </button>
+  </div>
+</div>
+
+<div id="secao-pre-jogo" class="jogo-section-card">
+  <p class="jogo-pre-jogo-msg">
+    As estatísticas ficam disponíveis para edição após a realização do jogo.
+  </p>
+</div>
+
+<script src="/mngr/js/jogo.js"></script>

@@ -1,0 +1,422 @@
+/* jogo.css */
+
+
+/* ── Card principal ─────────────────────────────── */
+.jogo-convocado-interactive-row {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    margin: 8px auto;
+    padding: 12px 20px;
+    text-align: center;
+    background-color: #f8fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #334155;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    user-select: none;
+  }
+
+  /* Quando a linha/label invisível for selecionada (Checked) */
+  .jogo-convocado-interactive-row:has(input:checked) {
+    background-color: #eff6ff;
+    border-color: #3b82f6;
+    color: #1d4ed8;
+    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.1);
+  }
+
+  .jogo-convocados-lista {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+.jogo-match-card {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(10, 61, 128, 0.08);
+    border: 1px solid #e2e8f0;
+    padding: 28px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.jogo-team-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+}
+
+.jogo-team-logo {
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.jogo-team-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: #0a3d80;
+    text-align: center;
+    margin: 0;
+}
+
+.jogo-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    min-width: 160px;
+}
+
+.jogo-meta-info {
+    font-size: 12px;
+    color: #627d98;
+    font-weight: 500;
+}
+
+.jogo-local { font-style: italic; }
+
+.jogo-score {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 48px;
+    font-weight: 800;
+    color: #0a3d80;
+    line-height: 1;
+}
+
+.jogo-score-sep {
+    font-size: 36px;
+    color: #cbd5e1;
+    font-weight: 400;
+}
+
+.jogo-oficial-tag {
+    background: #eff4fc;
+    color: #0a3d80;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    border: 1px solid #c7d9f5;
+}
+
+/* ── Section cards ──────────────────────────────── */
+.jogo-section-card {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(10, 61, 128, 0.08);
+    border: 1px solid #e2e8f0;
+    padding: 24px 28px;
+    margin-bottom: 20px;
+}
+
+.jogo-section-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: #0a3d80;
+    margin: 0 0 18px 0;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #eff4fc;
+}
+
+.jogo-subsection-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #0a3d80;
+    margin: 18px 0 12px 0;
+}
+
+.jogo-pre-jogo-msg {
+    color: #627d98;
+    font-size: 14px;
+    text-align: center;
+    padding: 12px 0;
+    margin: 0;
+}
+
+/* ── Lista de golos ─────────────────────────────── */
+.jogo-empty-msg {
+    color: #94a3b8;
+    font-size: 13px;
+    text-align: center;
+    padding: 8px 0;
+    margin: 0;
+}
+
+.jogo-golos-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+    
+    /* CORREÇÃO: Altura máxima fixa para conter os itens e evitar empurrar os logos do card superior */
+    max-height: 420px;
+    overflow-y: auto;
+    
+    /* Esconder barra de scroll em navegadores baseados no Firefox e IE/Edge */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+/* Esconder barra de scroll no Chrome, Safari e Opera */
+.jogo-golos-lista::-webkit-scrollbar {
+    display: none;
+}
+
+/* Aplicar o mesmo comportamento de scroll invisível à lista de cartões (HTML usa id="lista-cartoes") */
+#lista-cartoes {
+    max-height: 220px;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+#lista-cartoes::-webkit-scrollbar {
+    display: none;
+}
+
+.jogo-golo-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.jogo-golo-item.nossa  { background: #eff4fc; border-color: #c7d9f5; }
+.jogo-golo-item.adversario { background: #fef2f2; border-color: #fecaca; }
+
+.jogo-golo-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.jogo-golo-icon { font-size: 16px; }
+
+.jogo-golo-nome {
+    font-size: 14px;
+    font-weight: 600;
+    color: #0a3d80;
+}
+
+.jogo-golo-minuto {
+    font-size: 12px;
+    color: #627d98;
+    font-weight: 500;
+}
+
+.jogo-golo-assistente {
+    display: block;
+    font-size: 11px;
+    color: #627d98;
+    font-weight: 500;
+    margin-top: 2px;
+}
+
+.jogo-atleta-stats-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.jogo-atleta-stat-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background: #f8fafc;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+}
+
+.jogo-atleta-stat-nome {
+    flex: 1;
+    font-size: 13px;
+    font-weight: 500;
+    color: #334155;
+}
+
+.jogo-atleta-min {
+    width: 70px !important;
+    text-align: center;
+}
+
+.jogo-atleta-nota {
+    width: 160px !important;
+}
+
+.jogo-golo-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.jogo-golo-equipa {
+    font-size: 12px;
+    color: #627d98;
+}
+
+.jogo-btn-remover-golo {
+    background: none;
+    border: none;
+    color: #94a3b8;
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 1;
+    padding: 2px 4px;
+    border-radius: 4px;
+    transition: color 0.15s;
+}
+.jogo-btn-remover-golo:hover { color: #ef4444; }
+
+/* ── Formulário adicionar golo ──────────────────── */
+.jogo-adicionar-golo {
+    border-top: 1px solid #e2e8f0;
+    margin-top: 16px;
+    padding-top: 4px;
+}
+
+.jogo-golo-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: flex-end;
+}
+
+.jogo-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+    min-width: 140px;
+}
+
+.jogo-form-group label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #0a3d80;
+}
+
+.jogo-input {
+    padding: 10px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #0a3d80;
+    background: #f8fafc;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+}
+.jogo-input:focus { border-color: #0a3d80; background: #ffffff; }
+
+/* ── Botão principal ────────────────────────────── */
+.jogo-btn-primary {
+    background-color: #0a3d80;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 13px;
+    white-space: nowrap;
+    align-self: flex-end;
+    transition: background-color 0.2s ease;
+}
+.jogo-btn-primary:hover { background-color: #052654; }
+
+/* ── Estatísticas ───────────────────────────────── */
+.jogo-stats-header {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    text-align: center;
+    margin-bottom: 10px;
+    padding: 0 4px;
+}
+
+.jogo-stats-team-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #0a3d80;
+}
+
+.jogo-stat-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 4px;
+    border-bottom: 1px solid #f1f5f9;
+}
+.jogo-stat-row:last-child { border-bottom: none; }
+
+.jogo-stat-label {
+    font-size: 13px;
+    color: #627d98;
+    text-align: center;
+    font-weight: 500;
+}
+
+.jogo-stat-input {
+    padding: 7px 10px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #0a3d80;
+    background: #f8fafc;
+    outline: none;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+.jogo-stat-input:focus { border-color: #0a3d80; background: #ffffff; }
+.jogo-stat-input.nossa { text-align: right; }
+.jogo-stat-input.adversario { text-align: left; }
+
+@media (max-width: 768px) {
+    .jogo-match-card {
+        flex-direction: column;
+        padding: 20px 16px;
+        gap: 16px;
+        align-items: center;
+    }
+    .jogo-center {
+        min-width: 0;
+        width: 100%;
+        order: -1;
+    }
+    .jogo-score {
+        font-size: 36px;
+    }
+    .jogo-team-name {
+        font-size: 14px;
+    }
+    .jogo-team-logo {
+        width: 56px;
+        height: 56px;
+    }
+    .jogo-golo-form {
+        flex-direction: column;
+    }
+    .jogo-form-group {
+        min-width: 0;
+    }
+}
